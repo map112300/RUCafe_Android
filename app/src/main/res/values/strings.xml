@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RUCafe_Android</string>
+    <string name="main_menu">Main Menu</string>
+    <string name="rutgers_cafe">Rutgers Cafe</string>
 </resources>
