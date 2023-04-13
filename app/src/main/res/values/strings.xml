@@ -2,4 +2,8 @@
     <string name="app_name">RUCafe_Android</string>
     <string name="main_menu">Main Menu</string>
     <string name="rutgers_cafe">Rutgers Cafe</string>
+    <string name="basket_icon">Basket</string>
+    <string name="orders_icon">Order History</string>
+    <string name="coffee_icon">Order Coffee</string>
+    <string name="donuts_icon">Order Donuts</string>
 </resources>
