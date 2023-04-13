@@ -6,4 +6,15 @@
     <string name="orders_icon">Order History</string>
     <string name="coffee_icon">Order Coffee</string>
     <string name="donuts_icon">Order Donuts</string>
+    <string-array name="donut_types">
+        <item>Cake</item>
+        <item>Yeast</item>
+        <item>Hole</item>
+    </string-array>
+    <string name="remove_item">Remove</string>
+    <string name="place_order">Place Order</string>
+    <string name="total_Price">Total:</string>
+    <string name="sales_tax">Sales Tax:</string>
+    <string name="sub_total">Sub Total:</string>
+    <string name="default_price">$0.00</string>
 </resources>
