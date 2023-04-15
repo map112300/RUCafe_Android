@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -13,6 +15,8 @@ public class MainActivity extends AppCompatActivity {
     private ImageButton orderBT;
     private ImageButton donutBT;
     private ImageButton coffeeBT;
+
+    private Button toastBT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,14 @@ public class MainActivity extends AppCompatActivity {
         orderBT = (ImageButton) findViewById(R.id.order_Button);
         donutBT = (ImageButton) findViewById(R.id.donut_Button);
         coffeeBT = (ImageButton) findViewById(R.id.coffee_Button);
+        toastBT = (Button) findViewById(R.id.toastButton);
+
+        toastBT.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MainActivity.this, "Welcome to the RU CAFE!", Toast.LENGTH_LONG).show();
+            }
+        });
 
         basketBT.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,7 +68,5 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intentCoffee);
             }
         });
-
-
     }
 }

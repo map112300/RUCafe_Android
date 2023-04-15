@@ -6,6 +6,7 @@
     <string name="orders_icon">Order History</string>
     <string name="coffee_icon">Order Coffee</string>
     <string name="donuts_icon">Order Donuts</string>
+    <string name="toast_button">CLICK ME!!!!</string>
     <string-array name="donut_types">
         <item>Cake</item>
         <item>Yeast</item>
