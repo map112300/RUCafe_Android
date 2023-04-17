@@ -11,16 +11,19 @@ public class DonutItem {
     private int image;
     private double donutPrice;
 
+    private int quantity;
+
     /**
      * Parameterized constructor.
      * @param flavor
      * @param image
      * @param donutPrice
      */
-    public DonutItem(String flavor, int image, double donutPrice) {
+    public DonutItem(String flavor, int image, double donutPrice, int quantity) {
         this.flavor = flavor;
         this.image = image;
         this.donutPrice = donutPrice;
+        this.quantity = quantity;
     }
 
     /**
@@ -46,6 +49,12 @@ public class DonutItem {
     public double getDonutPrice() {
         return donutPrice;
     }
+
+    /**
+     * Getter method that returns the donut quantity
+     * @return
+     */
+    public int getQuantity() { return quantity; }
 
 
 

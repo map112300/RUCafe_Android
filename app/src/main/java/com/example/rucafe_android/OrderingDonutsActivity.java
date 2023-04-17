@@ -56,17 +56,17 @@ public class OrderingDonutsActivity extends AppCompatActivity {
 
         int current = 0; //will be used for setting images
         for(int i = 0; i < cakeFlavors.length; i++) {
-            donutItems.add(new DonutItem(cakeFlavors[i], itemImages[current], DonutType.CAKE.price()));
+            donutItems.add(new DonutItem(cakeFlavors[i], itemImages[current], DonutType.CAKE.price(), 0));
             current++;
         }
 
         for(int i = 0; i < holeFlavors.length; i++) {
-            donutItems.add(new DonutItem(holeFlavors[i], itemImages[current], DonutType.HOLE.price()));
+            donutItems.add(new DonutItem(holeFlavors[i], itemImages[current], DonutType.HOLE.price(), 0));
             current++;
         }
 
         for(int i = 0; i < yeastFlavors.length; i++) {
-            donutItems.add(new DonutItem(yeastFlavors[i], itemImages[current], DonutType.YEAST.price()));
+            donutItems.add(new DonutItem(yeastFlavors[i], itemImages[current], DonutType.YEAST.price(), 0));
             current++;
         }
     }

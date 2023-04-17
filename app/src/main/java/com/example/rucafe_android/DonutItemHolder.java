@@ -65,6 +65,7 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
         holder.donut_flavor.setText(donutItems.get(position).getFlavor());
         holder.donut_price.setText(String.valueOf(donutItems.get(position).getDonutPrice()));
         holder.donut_image.setImageResource(donutItems.get(position).getImage());
+        holder.donut_qty.setText(String.valueOf(donutItems.get(position).getQuantity()));
     }
 
     /**
@@ -83,53 +84,82 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
      */
     public static class ItemsHolder extends RecyclerView.ViewHolder {
 
-        private TextView donut_flavor, donut_price;
+        private TextView donut_flavor, donut_price, donut_qty;
         private ImageView donut_image;
         private Button btn_add, btn_remove;
         private ConstraintLayout parentLayout; //row layout
+
+        int quantity = 0;
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
             donut_flavor = itemView.findViewById(R.id.donut_flavor);
             donut_price = itemView.findViewById(R.id.donut_price);
+            donut_qty = itemView.findViewById(R.id.donut_qty);
             donut_image = itemView.findViewById(R.id.donut_image);
             btn_add = itemView.findViewById(R.id.btn_add);
             btn_remove = itemView.findViewById(R.id.btn_remove);
             parentLayout = itemView.findViewById(R.id.rowLayout);
 
-
-            //TODO IMPLEMENTATION IMPLEMENTATION
-            /**
-             * Set the onClickListener for the button on each row.
-             * Clicking on the button will create an AlertDialog with the options of YES/NO.
-             *
-             * @param itemView
-             */
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
-                public void onClick(View view) {
-                    AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                    alert.setTitle("Add to order");
-                    alert.setMessage(donut_flavor.getText().toString());
-                    //handle the "YES" click
-                    alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    donut_flavor.getText().toString() + " added.", Toast.LENGTH_LONG).show();
-                        }
-                        //handle the "NO" click
-                    }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int which) {
-                            Toast.makeText(itemView.getContext(),
-                                    donut_flavor.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
-                        }
-                    });
-                    AlertDialog dialog = alert.create();
-                    dialog.show();
+                public void onClick(View v) {
+                    quantity++;
+                    donut_qty.setText(String.valueOf(quantity));
                 }
             });
+            btn_remove.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(quantity == 0) {
+                        AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
+                        alert.setTitle("RU Cafe Error");
+                        alert.setMessage("Donut Quantity Can Not Be Negative!");
 
+                        AlertDialog dialog = alert.create();
+                        dialog.show();
+                    } else {
+                        quantity--;
+                        donut_qty.setText(String.valueOf(quantity));
+                    }
+
+                }
+            });
         }
     }
 }
 
+
+
+
+        ////TODO IMPLEMENTATION IMPLEMENTATION
+        ////TODO REUSE THIS CODE FOR ALERTS
+        ///**
+        // * Set the onClickListener for the button on each row.
+        // * Clicking on the button will create an AlertDialog with the options of YES/NO.
+        // *
+        // * @param itemView
+        // */
+        //            btn_add.setOnClickListener(new View.OnClickListener() {
+        //@Override
+        //public void onClick(View view) {
+        //        AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
+        //        alert.setTitle("Add to order");
+        //        alert.setMessage(donut_flavor.getText().toString());
+        //        //handle the "YES" click
+        //        alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+        //public void onClick(DialogInterface dialog, int which) {
+        //        Toast.makeText(itemView.getContext(),
+        //        donut_flavor.getText().toString() + " added.", Toast.LENGTH_LONG).show();
+        //        }
+        //        //handle the "NO" click
+        //        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+        //public void onClick(DialogInterface dialog, int which) {
+        //        Toast.makeText(itemView.getContext(),
+        //        donut_flavor.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
+        //        }
+        //        });
+        //        AlertDialog dialog = alert.create();
+        //        dialog.show();
+        //        }
+        //        });

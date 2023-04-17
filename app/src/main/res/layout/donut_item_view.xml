@@ -25,7 +25,7 @@
                 android:id="@+id/btn_remove"
                 android:layout_width="47dp"
                 android:layout_height="43dp"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="12dp"
                 android:layout_marginBottom="32dp"
                 android:text="@string/remove_button"
                 android:textSize="14sp"
@@ -37,8 +37,8 @@
 
             <TextView
                 android:id="@+id/donut_flavor"
-                android:layout_width="211dp"
-                android:layout_height="42dp"
+                android:layout_width="251dp"
+                android:layout_height="39dp"
                 android:layout_marginStart="12dp"
                 android:layout_marginTop="28dp"
                 android:textColor="#FF5722"
@@ -60,8 +60,8 @@
 
             <TextView
                 android:id="@+id/donut_price"
-                android:layout_width="78dp"
-                android:layout_height="40dp"
+                android:layout_width="65dp"
+                android:layout_height="39dp"
                 android:layout_marginTop="16dp"
                 android:textColor="#FF5722"
                 android:textSize="20sp"
@@ -72,7 +72,7 @@
                 android:id="@+id/btn_add"
                 android:layout_width="47dp"
                 android:layout_height="43dp"
-                android:layout_marginStart="84dp"
+                android:layout_marginStart="112dp"
                 android:layout_marginBottom="32dp"
                 android:text="@string/add_button"
                 android:textSize="14sp"
@@ -81,6 +81,18 @@
                 app:layout_constraintTop_toTopOf="@+id/donut_price"
                 app:layout_constraintVertical_bias="0.0"
                 tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/donut_qty"
+                android:layout_width="27dp"
+                android:layout_height="33dp"
+                android:layout_marginStart="76dp"
+                android:layout_marginBottom="32dp"
+                android:text="@string/default_qty"
+                android:textColor="#FF5722"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/donut_price" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
