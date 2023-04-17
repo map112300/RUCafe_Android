@@ -5,8 +5,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
@@ -14,10 +16,8 @@ public class OrderingDonutsActivity extends AppCompatActivity {
 
     private Button addToBasket;
     private TextView donutTotal;
-
     private ArrayList <DonutItem> donutItems = new ArrayList<>();
 
-    //TODO update with images once uploaded
     private int[] itemImages = {R.drawable.blueberry_cake, R.drawable.coffee_cake, R.drawable.oldfashioned_cake
             , R.drawable.chocolate_hole, R.drawable.glazed_hole, R.drawable.jelly_hole
             , R.drawable.cinnamon_hole, R.drawable.chocolate_yeast, R.drawable.strawberry_yeast
@@ -37,9 +37,17 @@ public class OrderingDonutsActivity extends AppCompatActivity {
         addToBasket = (Button) findViewById(R.id.add_to_BasketBT);
         donutTotal = findViewById(R.id.donut_total_Field);
 
+        //TODO NEED TO PROPERLY IMPLEMENT
+        addToBasket.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(OrderingDonutsActivity.this,
+                        "Donuts Have Been Added To Basket!", Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
-    //TODO update images + prices for items
     private void setupDonuts() {
 
         String[] cakeFlavors = getResources().getStringArray(R.array.cake_flavors);
