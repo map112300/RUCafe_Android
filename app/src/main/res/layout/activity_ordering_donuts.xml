@@ -9,7 +9,7 @@
 
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/add_to_BasketBT"
         android:layout_width="167dp"
         android:layout_height="86dp"
         android:layout_marginStart="205dp"
@@ -23,7 +23,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textView16"
+        android:id="@+id/donut_total_Field"
         android:layout_width="94dp"
         android:layout_height="28dp"
         android:layout_marginStart="38dp"
