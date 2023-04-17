@@ -97,17 +97,14 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
             btn_remove = itemView.findViewById(R.id.btn_remove);
             parentLayout = itemView.findViewById(R.id.rowLayout);
 
-        }
 
-
-        //TODO IMPLEMENTATION IMPLEMENTATION
-        /**
-         * Set the onClickListener for the button on each row.
-         * Clicking on the button will create an AlertDialog with the options of YES/NO.
-         *
-         * @param itemView
-         */
-        private void setAddButtonOnClick(@NonNull View itemView) {
+            //TODO IMPLEMENTATION IMPLEMENTATION
+            /**
+             * Set the onClickListener for the button on each row.
+             * Clicking on the button will create an AlertDialog with the options of YES/NO.
+             *
+             * @param itemView
+             */
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
@@ -131,6 +128,7 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
                     dialog.show();
                 }
             });
+
         }
     }
 }

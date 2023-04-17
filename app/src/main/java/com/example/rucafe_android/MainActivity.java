@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         coffeeBT = (ImageButton) findViewById(R.id.coffee_Button);
         toastBT = (Button) findViewById(R.id.toastButton);
 
+        //TODO CAN REMOVE IF NOT NECESSARY
         toastBT.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
