@@ -3,7 +3,6 @@ package com.example.rucafe_android;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -19,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsHolder> {
+public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.ItemsHolder> {
 
     private Context context;
     private ArrayList<DonutItem> donutItems;
@@ -30,7 +28,7 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
      * @param context
      * @param donutItems
      */
-    public DonutItemHolder(Context context, ArrayList<DonutItem> donutItems) {
+    public DonutItemAdapter(Context context, ArrayList<DonutItem> donutItems) {
         this.context = context;
         this.donutItems = donutItems;
     }
@@ -45,11 +43,11 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
      */
     @NonNull
     @Override
-    public DonutItemHolder.ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DonutItemAdapter.ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflator = LayoutInflater.from(context);
         View view = inflator.inflate(R.layout.donut_item_view, parent, false);
 
-        return new DonutItemHolder.ItemsHolder(view);
+        return new DonutItemAdapter.ItemsHolder(view);
     }
 
 
@@ -61,11 +59,12 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
      * @param position the index of the item in the list of items
      */
     @Override
-    public void onBindViewHolder(@NonNull DonutItemHolder.ItemsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DonutItemAdapter.ItemsHolder holder, int position) {
         holder.donut_flavor.setText(donutItems.get(position).getFlavor());
         holder.donut_price.setText(String.valueOf(donutItems.get(position).getDonutPrice()));
         holder.donut_image.setImageResource(donutItems.get(position).getImage());
         holder.donut_qty.setText(String.valueOf(donutItems.get(position).getQuantity()));
+
     }
 
     /**
@@ -82,14 +81,14 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
     /**
      * Get the views from the row layout file, similar to the onCreate() method.
      */
-    public static class ItemsHolder extends RecyclerView.ViewHolder {
+    public class ItemsHolder extends RecyclerView.ViewHolder {
 
         private TextView donut_flavor, donut_price, donut_qty;
         private ImageView donut_image;
         private Button btn_add, btn_remove;
         private ConstraintLayout parentLayout; //row layout
 
-        int quantity = 0;
+        private int quantity = 0;
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
@@ -128,8 +127,6 @@ public class DonutItemHolder extends RecyclerView.Adapter<DonutItemHolder.ItemsH
         }
     }
 }
-
-
 
 
         ////TODO IMPLEMENTATION IMPLEMENTATION

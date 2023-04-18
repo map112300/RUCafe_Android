@@ -9,10 +9,10 @@
 
     <ImageButton
         android:id="@+id/donut_Button"
-        android:layout_width="95dp"
-        android:layout_height="75dp"
+        android:layout_width="91dp"
+        android:layout_height="72dp"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="220dp"
+        android:layout_marginTop="224dp"
         android:adjustViewBounds="false"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
@@ -25,8 +25,8 @@
         android:id="@+id/coffee_Button"
         android:layout_width="95dp"
         android:layout_height="75dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="292dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="296dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:scaleType="fitCenter"
@@ -36,10 +36,10 @@
 
     <ImageButton
         android:id="@+id/order_Button"
-        android:layout_width="95dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="148dp"
-        android:layout_marginEnd="276dp"
+        android:layout_width="89dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="152dp"
+        android:layout_marginEnd="280dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"
         android:scaleType="fitCenter"
@@ -49,9 +49,9 @@
 
     <ImageButton
         android:id="@+id/basket_Button"
-        android:layout_width="95dp"
-        android:layout_height="75dp"
-        android:layout_marginTop="76dp"
+        android:layout_width="93dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="80dp"
         android:layout_marginEnd="280dp"
         android:background="#FFFFFF"
         android:backgroundTint="#FFFFFF"

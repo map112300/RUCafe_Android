@@ -14,9 +14,12 @@ import java.util.ArrayList;
 
 public class OrderingDonutsActivity extends AppCompatActivity {
 
+    private RecyclerView recycler;
     private Button addToBasket;
     private TextView donutTotal;
     private ArrayList <DonutItem> donutItems = new ArrayList<>();
+
+
 
     private int[] itemImages = {R.drawable.blueberry_cake, R.drawable.coffee_cake, R.drawable.oldfashioned_cake
             , R.drawable.chocolate_hole, R.drawable.glazed_hole, R.drawable.jelly_hole
@@ -28,9 +31,9 @@ public class OrderingDonutsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordering_donuts);
-        RecyclerView recycler = findViewById(R.id.rcView);
+        recycler = findViewById(R.id.rcView);
         setupDonuts();
-        DonutItemHolder donutHolder = new DonutItemHolder(this, donutItems);
+        DonutItemAdapter donutHolder = new DonutItemAdapter(this, donutItems);
         recycler.setAdapter(donutHolder);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
