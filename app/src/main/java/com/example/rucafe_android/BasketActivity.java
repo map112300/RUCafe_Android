@@ -31,10 +31,10 @@ public class BasketActivity extends AppCompatActivity {
 
         setPriceValues();
 
-
-
     }
 
+
+    //TODO will need to adjust implementation upon completion of coffee
     /**
      * Helper method that sets all price views
      */
