@@ -28,15 +28,6 @@ public class MainActivity extends AppCompatActivity {
         orderBT = (ImageButton) findViewById(R.id.order_Button);
         donutBT = (ImageButton) findViewById(R.id.donut_Button);
         coffeeBT = (ImageButton) findViewById(R.id.coffee_Button);
-        toastBT = (Button) findViewById(R.id.toastButton);
-
-        //TODO CAN REMOVE IF NOT NECESSARY
-        toastBT.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(MainActivity.this, "Welcome to the RU CAFE!", Toast.LENGTH_LONG).show();
-            }
-        });
 
         basketBT.setOnClickListener(new View.OnClickListener() {
             @Override

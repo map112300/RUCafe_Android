@@ -22,17 +22,19 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
     private Context context;
     private ArrayList<DonutItem> donutItems;
 
+    private RecyclerViewClickInterface recyclerViewClickInterface;
+
     /**
      * Constructor for DonutItemHolder
      *
      * @param context
      * @param donutItems
      */
-    public DonutItemAdapter(Context context, ArrayList<DonutItem> donutItems) {
+    public DonutItemAdapter(Context context, ArrayList<DonutItem> donutItems, RecyclerViewClickInterface recyclerViewClickInterface) {
         this.context = context;
         this.donutItems = donutItems;
+        this.recyclerViewClickInterface = recyclerViewClickInterface;
     }
-
 
     /**
      * This method will inflate the row layout for the items in the RecyclerView
@@ -44,8 +46,8 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
     @NonNull
     @Override
     public DonutItemAdapter.ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        LayoutInflater inflator = LayoutInflater.from(context);
-        View view = inflator.inflate(R.layout.donut_item_view, parent, false);
+        LayoutInflater inflater = LayoutInflater.from(context);
+        View view = inflater.inflate(R.layout.donut_item_view, parent, false);
 
         return new DonutItemAdapter.ItemsHolder(view);
     }
@@ -105,6 +107,7 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
                 public void onClick(View v) {
                     quantity++;
                     donut_qty.setText(String.valueOf(quantity));
+                    recyclerViewClickInterface.onIncrementBTClick(getAdapterPosition(), quantity);
                 }
             });
             btn_remove.setOnClickListener(new View.OnClickListener() {
@@ -120,6 +123,7 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
                     } else {
                         quantity--;
                         donut_qty.setText(String.valueOf(quantity));
+                        recyclerViewClickInterface.onDecrementBTClick(getAdapterPosition(), quantity);
                     }
 
                 }

@@ -43,7 +43,8 @@
     <string name="total_Price">Total:</string>
     <string name="sales_tax">Sales Tax:</string>
     <string name="sub_total">Sub Total:</string>
-    <string name="default_price">$0.00</string>
+    <string name="default_price">0.00</string>
+    <string name="dollar_sign">$</string>
     <string name="add_button">+</string>
     <string name="remove_button">-</string>
 

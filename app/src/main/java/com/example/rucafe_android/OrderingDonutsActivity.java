@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -12,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class OrderingDonutsActivity extends AppCompatActivity {
+public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
 
     private RecyclerView recycler;
     private Button addToBasket;
@@ -33,7 +34,7 @@ public class OrderingDonutsActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ordering_donuts);
         recycler = findViewById(R.id.rcView);
         setupDonuts();
-        DonutItemAdapter donutHolder = new DonutItemAdapter(this, donutItems);
+        DonutItemAdapter donutHolder = new DonutItemAdapter(this, donutItems, this);
         recycler.setAdapter(donutHolder);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -51,6 +52,9 @@ public class OrderingDonutsActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Adds DonutItems to arraylist of donut items, populates default values
+     */
     private void setupDonuts() {
 
         String[] cakeFlavors = getResources().getStringArray(R.array.cake_flavors);
@@ -72,5 +76,39 @@ public class OrderingDonutsActivity extends AppCompatActivity {
             donutItems.add(new DonutItem(yeastFlavors[i], itemImages[current], DonutType.YEAST.price(), 0));
             current++;
         }
+    }
+
+    /**
+     * Interface method that updates total when donut quantity incremented
+     * @param position
+     * @param quantity
+     */
+    @Override
+    public void onIncrementBTClick(int position, int quantity) {
+
+        double price = donutItems.get(position).getDonutPrice();
+        double total = Double.valueOf(donutTotal.getText().toString());
+        donutItems.get(position).setQuantity(quantity);
+        total += price;
+        String totalString = String.format("%.2f", total);
+        donutTotal.setText(totalString);
+    }
+
+    /**
+     * Interface method that updates total price when donut quantity decremented
+     * @param position
+     * @param quantity
+     */
+    @Override
+    public void onDecrementBTClick(int position, int quantity) {
+
+        double price = donutItems.get(position).getDonutPrice();
+        double total = Double.valueOf(donutTotal.getText().toString());
+        donutItems.get(position).setQuantity(quantity);
+
+        total -= price;
+        String totalString = String.format("%.2f", total);
+        donutTotal.setText(totalString);
+
     }
 }

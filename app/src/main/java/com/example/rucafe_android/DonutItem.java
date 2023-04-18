@@ -56,6 +56,12 @@ public class DonutItem {
      */
     public int getQuantity() { return quantity; }
 
+    /**
+     * Setter method that adjusts the quantity of our donut item
+     * @param quantity
+     */
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
 
 
 
