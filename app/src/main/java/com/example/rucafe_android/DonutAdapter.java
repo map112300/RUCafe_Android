@@ -3,7 +3,6 @@ package com.example.rucafe_android;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,11 +16,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.ItemsHolder> {
+public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder> {
 
     private Context context;
-    //private ArrayList<DonutItem> donutItems;
-    public static ArrayList<DonutItem> donutItems;
+    //private ArrayList<Donut> donutItems;
+    public static ArrayList<Donut> donutItems;
     private RecyclerViewClickInterface recyclerViewClickInterface;
 
     /**
@@ -30,7 +29,7 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
      * @param context
      * @param donutItems
      */
-    public DonutItemAdapter(Context context, ArrayList<DonutItem> donutItems, RecyclerViewClickInterface recyclerViewClickInterface) {
+    public DonutAdapter(Context context, ArrayList<Donut> donutItems, RecyclerViewClickInterface recyclerViewClickInterface) {
         this.context = context;
         this.donutItems = donutItems;
         this.recyclerViewClickInterface = recyclerViewClickInterface;
@@ -45,11 +44,11 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
      */
     @NonNull
     @Override
-    public DonutItemAdapter.ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public DonutAdapter.ItemsHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.donut_item_view, parent, false);
 
-        return new DonutItemAdapter.ItemsHolder(view);
+        return new DonutAdapter.ItemsHolder(view);
     }
 
     /**
@@ -60,7 +59,7 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
      * @param position the index of the item in the list of items
      */
     @Override
-    public void onBindViewHolder(@NonNull DonutItemAdapter.ItemsHolder holder, int position) {
+    public void onBindViewHolder(@NonNull DonutAdapter.ItemsHolder holder, int position) {
         holder.donut_flavor.setText(donutItems.get(position).getFlavor());
         holder.donut_price.setText(String.valueOf(donutItems.get(position).getDonutPrice()));
         holder.donut_image.setImageResource(donutItems.get(position).getImage());

@@ -9,7 +9,8 @@ package com.example.rucafe_android;
 public class Donut extends MenuItem {
     private final DonutType type;
     private final String flavor;
-    private final int quantity;
+    private int quantity;
+    private final int image;
 
     /**
      * Creates a donut object of the given type and quantity.
@@ -17,11 +18,13 @@ public class Donut extends MenuItem {
      * @param type     the type of the donut
      * @param quantity the number of donuts
      * @param flavor   the flavor of the donut
+     * @param image
      */
-    Donut(DonutType type, int quantity, String flavor) {
+    Donut(DonutType type, int quantity, String flavor, int image) {
         this.type = type;
         this.quantity = quantity;
         this.flavor = flavor;
+        this.image = image;
     }
 
     /**
@@ -61,6 +64,20 @@ public class Donut extends MenuItem {
     }
 
     /**
+     * Setter method that adjusts the quantity of our donut item
+     * @param quantity
+     */
+    public void setQuantity(int quantity) { this.quantity = quantity; }
+
+    /**
+     * Getter method that returns the image of an item.
+     * @return the image of an item.
+     */
+    public int getImage() {
+        return image;
+    }
+
+    /**
      * Returns a String showing the DonutFlavor and quantity
      *
      * @return String of DonutFlavor and Quantity
@@ -68,6 +85,14 @@ public class Donut extends MenuItem {
     @Override
     public String toString() {
         return this.flavor + " Donut (" + this.quantity + ")";
+    }
+
+    /**
+     * Getter method that returns the donut price.
+     * @return the donut price of the item.
+     */
+    public double getDonutPrice() {
+        return this.type.price();
     }
 
     /**

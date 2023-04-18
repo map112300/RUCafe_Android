@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,9 +22,9 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     private RecyclerView recycler;
     private Button addToBasket;
     private TextView donutTotal;
-    private ArrayList <DonutItem> donutItems = new ArrayList<>();
+    private ArrayList <Donut> donutItems = new ArrayList<>();
 
-    private DonutItemAdapter donutHolder;
+    private DonutAdapter donutHolder;
 
 
 
@@ -41,7 +40,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         setContentView(R.layout.activity_ordering_donuts);
         recycler = findViewById(R.id.rcView);
         setupDonuts();
-        donutHolder = new DonutItemAdapter(this, donutItems, this);
+        donutHolder = new DonutAdapter(this, donutItems, this);
         recycler.setAdapter(donutHolder);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -94,17 +93,17 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
         int current = 0; //will be used for setting images
         for(int i = 0; i < cakeFlavors.length; i++) {
-            donutItems.add(new DonutItem(cakeFlavors[i], itemImages[current], DonutType.CAKE.price(), 0));
+            donutItems.add(new Donut(DonutType.CAKE, 0, cakeFlavors[i],  itemImages[current]));
             current++;
         }
 
         for(int i = 0; i < holeFlavors.length; i++) {
-            donutItems.add(new DonutItem(holeFlavors[i], itemImages[current], DonutType.HOLE.price(), 0));
+            donutItems.add(new Donut(DonutType.HOLE,  0, holeFlavors[i],  itemImages[current]));
             current++;
         }
 
         for(int i = 0; i < yeastFlavors.length; i++) {
-            donutItems.add(new DonutItem(yeastFlavors[i], itemImages[current], DonutType.YEAST.price(), 0));
+            donutItems.add(new Donut(DonutType.YEAST,  0, yeastFlavors[i], itemImages[current]));
             current++;
         }
     }
@@ -151,7 +150,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         for(int i = 0; i < donutItems.size(); i++) { //resets recycler view
             donutItems.get(i).setQuantity(0);
         }
-        DonutItemAdapter.ItemsHolder.quantity = 0; //updates quantity in adapter
+        DonutAdapter.ItemsHolder.quantity = 0; //updates quantity in adapter
         donutHolder.notifyDataSetChanged(); //notifies data change
         donutTotal.setText("0.00");
 
