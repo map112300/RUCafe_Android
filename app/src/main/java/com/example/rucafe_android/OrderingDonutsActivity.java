@@ -19,14 +19,13 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     //TODO FIX FIX this is value that will get passed
     //TODO when order is placed total donuts needs to be reset
     public static double totalDonuts = 0.00;
+
+    public static ArrayList<Donut> donutsToAdd = new ArrayList<>();
     private RecyclerView recycler;
     private Button addToBasket;
     private TextView donutTotal;
     private ArrayList <Donut> donutItems = new ArrayList<>();
-
     private DonutAdapter donutHolder;
-
-
 
     private int[] itemImages = {R.drawable.blueberry_cake, R.drawable.coffee_cake, R.drawable.oldfashioned_cake
             , R.drawable.chocolate_hole, R.drawable.glazed_hole, R.drawable.jelly_hole
@@ -62,7 +61,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         totalDonuts += Double.valueOf(donutTotal.getText().toString()); //update totalDonuts to be passed
-
+                        updateDonutsSelected();
                         clearAllFields();
                         Toast.makeText(OrderingDonutsActivity.this,
                                 "Donuts have been added to basket!", Toast.LENGTH_LONG).show();
@@ -154,5 +153,21 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         donutHolder.notifyDataSetChanged(); //notifies data change
         donutTotal.setText("0.00");
 
+    }
+
+
+    //TODO need to update quantities incorrect in basket
+    /**
+     * Method that iterates through recycler view to create an arraylist of Donuts to add to basket
+     * @return
+     */
+    public void updateDonutsSelected() {
+
+        for(int i = 0; i < donutItems.size(); i++) {
+            if(donutItems.get(i).getQuantity() > 0) {
+                donutsToAdd.add(donutItems.get(i));
+                donutsToAdd.get(i).setQuantity(donutItems.get(i).getQuantity());
+            }
+        }
     }
 }

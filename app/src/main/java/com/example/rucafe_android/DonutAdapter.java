@@ -19,7 +19,6 @@ import java.util.ArrayList;
 public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder> {
 
     private Context context;
-    //private ArrayList<Donut> donutItems;
     public static ArrayList<Donut> donutItems;
     private RecyclerViewClickInterface recyclerViewClickInterface;
 

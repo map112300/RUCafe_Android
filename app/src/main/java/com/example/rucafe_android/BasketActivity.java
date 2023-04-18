@@ -3,17 +3,23 @@ package com.example.rucafe_android;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class BasketActivity extends AppCompatActivity {
 
     private ListView listView;
 
+    //TODO get rid of remove button make it so click can remove with alert
     private Button remove, placeOrder;
 
     private TextView subTotal, salesTax, total;
+
+    private ArrayList<MenuItem> listViewItems;
 
     private final double NJ_TAX = .06625;
 
@@ -29,6 +35,11 @@ public class BasketActivity extends AppCompatActivity {
         salesTax = findViewById(R.id.sales_tax_field);
         total = findViewById(R.id.total_field);
 
+
+        ArrayAdapter<Donut> menuItemArrayAdapter = new ArrayAdapter<Donut>(
+                this, android.R.layout.simple_list_item_1, OrderingDonutsActivity.donutsToAdd);
+
+        listView.setAdapter(menuItemArrayAdapter);
         setPriceValues();
 
     }
@@ -40,7 +51,7 @@ public class BasketActivity extends AppCompatActivity {
      */
     private void setPriceValues() {
 
-        double totalFromDonutActivity =  OrderingDonutsActivity.totalDonuts;
+        double totalFromDonutActivity = OrderingDonutsActivity.totalDonuts;
         double tax = NJ_TAX * totalFromDonutActivity;
         double totalOrder = tax + totalFromDonutActivity;
 
