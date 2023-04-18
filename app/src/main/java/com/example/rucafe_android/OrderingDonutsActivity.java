@@ -1,9 +1,11 @@
 package com.example.rucafe_android;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +17,8 @@ import java.util.ArrayList;
 
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
 
+    //TODO FIX FIX this is value that will get passed
+    public static double totalDonuts = 0.00;
     private RecyclerView recycler;
     private Button addToBasket;
     private TextView donutTotal;
@@ -41,12 +45,29 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         addToBasket = (Button) findViewById(R.id.add_to_BasketBT);
         donutTotal = findViewById(R.id.donut_total_Field);
 
+
         //TODO NEED TO PROPERLY IMPLEMENT
         addToBasket.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Toast.makeText(OrderingDonutsActivity.this,
-                        "Donuts Have Been Added To Basket!", Toast.LENGTH_SHORT).show();
+            public void onClick(View view) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(OrderingDonutsActivity.this);
+                alert.setTitle("Add to order");
+                alert.setMessage("Would you like to add these donuts to your order?");
+                //handle the "YES" click
+                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(OrderingDonutsActivity.this,
+                                "Donuts have been added to basket!", Toast.LENGTH_LONG).show();
+                    }
+                    //handle the "NO" click
+                }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(OrderingDonutsActivity.this,
+                                "Donuts have not been added to basket!", Toast.LENGTH_LONG).show();
+                    }
+                });
+                AlertDialog dialog = alert.create();
+                dialog.show();
             }
         });
 

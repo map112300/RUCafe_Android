@@ -131,36 +131,3 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
         }
     }
 }
-
-
-        ////TODO IMPLEMENTATION IMPLEMENTATION
-        ////TODO REUSE THIS CODE FOR ALERTS
-        ///**
-        // * Set the onClickListener for the button on each row.
-        // * Clicking on the button will create an AlertDialog with the options of YES/NO.
-        // *
-        // * @param itemView
-        // */
-        //            btn_add.setOnClickListener(new View.OnClickListener() {
-        //@Override
-        //public void onClick(View view) {
-        //        AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-        //        alert.setTitle("Add to order");
-        //        alert.setMessage(donut_flavor.getText().toString());
-        //        //handle the "YES" click
-        //        alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-        //public void onClick(DialogInterface dialog, int which) {
-        //        Toast.makeText(itemView.getContext(),
-        //        donut_flavor.getText().toString() + " added.", Toast.LENGTH_LONG).show();
-        //        }
-        //        //handle the "NO" click
-        //        }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-        //public void onClick(DialogInterface dialog, int which) {
-        //        Toast.makeText(itemView.getContext(),
-        //        donut_flavor.getText().toString() + " not added.", Toast.LENGTH_LONG).show();
-        //        }
-        //        });
-        //        AlertDialog dialog = alert.create();
-        //        dialog.show();
-        //        }
-        //        });
