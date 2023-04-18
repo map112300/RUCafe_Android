@@ -40,7 +40,7 @@ public class BasketActivity extends AppCompatActivity {
      */
     private void setPriceValues() {
 
-        double totalFromDonutActivity = OrderingDonutsActivity.totalDonuts;
+        double totalFromDonutActivity =  OrderingDonutsActivity.totalDonuts;
         double tax = NJ_TAX * totalFromDonutActivity;
         double totalOrder = tax + totalFromDonutActivity;
 

@@ -89,7 +89,8 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
         private Button btn_add, btn_remove;
         private ConstraintLayout parentLayout; //row layout
 
-        private int quantity = 0;
+        public static int quantity = 0;
+
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);

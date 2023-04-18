@@ -18,11 +18,14 @@ import java.util.ArrayList;
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
 
     //TODO FIX FIX this is value that will get passed
+    //TODO when order is placed total donuts needs to be reset
     public static double totalDonuts = 0.00;
     private RecyclerView recycler;
     private Button addToBasket;
     private TextView donutTotal;
     private ArrayList <DonutItem> donutItems = new ArrayList<>();
+
+    private DonutItemAdapter donutHolder;
 
 
 
@@ -38,7 +41,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         setContentView(R.layout.activity_ordering_donuts);
         recycler = findViewById(R.id.rcView);
         setupDonuts();
-        DonutItemAdapter donutHolder = new DonutItemAdapter(this, donutItems, this);
+        donutHolder = new DonutItemAdapter(this, donutItems, this);
         recycler.setAdapter(donutHolder);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
@@ -59,11 +62,12 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
                 //TODO transfer data on yes click and clear all fields
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        totalDonuts = Double.valueOf(donutTotal.getText().toString()); //update totalDonuts to be passed
+                        totalDonuts += Double.valueOf(donutTotal.getText().toString()); //update totalDonuts to be passed
 
-
+                        clearAllFields();
                         Toast.makeText(OrderingDonutsActivity.this,
                                 "Donuts have been added to basket!", Toast.LENGTH_LONG).show();
+
                     }
                     //handle the "NO" click
                 }).setNegativeButton("no", new DialogInterface.OnClickListener() {
@@ -136,6 +140,20 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         total -= price;
         String totalString = String.format("%.2f", total);
         donutTotal.setText(totalString);
+
+    }
+
+    /**
+     * Helper that resets default values upon successful order placement
+     */
+    public void clearAllFields() {
+
+        for(int i = 0; i < donutItems.size(); i++) { //resets recycler view
+            donutItems.get(i).setQuantity(0);
+        }
+        DonutItemAdapter.ItemsHolder.quantity = 0; //updates quantity in adapter
+        donutHolder.notifyDataSetChanged(); //notifies data change
+        donutTotal.setText("0.00");
 
     }
 }
