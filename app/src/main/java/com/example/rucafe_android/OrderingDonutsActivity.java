@@ -53,9 +53,15 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
                 AlertDialog.Builder alert = new AlertDialog.Builder(OrderingDonutsActivity.this);
                 alert.setTitle("Add to order");
                 alert.setMessage("Would you like to add these donuts to your order?");
+
+
                 //handle the "YES" click
+                //TODO transfer data on yes click and clear all fields
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
+                        totalDonuts = Double.valueOf(donutTotal.getText().toString()); //update totalDonuts to be passed
+
+
                         Toast.makeText(OrderingDonutsActivity.this,
                                 "Donuts have been added to basket!", Toast.LENGTH_LONG).show();
                     }

@@ -15,6 +15,8 @@ public class BasketActivity extends AppCompatActivity {
 
     private TextView subTotal, salesTax, total;
 
+    private final double NJ_TAX = .06625;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +29,30 @@ public class BasketActivity extends AppCompatActivity {
         salesTax = findViewById(R.id.sales_tax_field);
         total = findViewById(R.id.total_field);
 
+        setPriceValues();
+
+
+
+    }
+
+    /**
+     * Helper method that sets all price views
+     */
+    private void setPriceValues() {
+
+        double totalFromDonutActivity = OrderingDonutsActivity.totalDonuts;
+        double tax = NJ_TAX * totalFromDonutActivity;
+        double totalOrder = tax + totalFromDonutActivity;
+
+        String totalFromDonutActivityString = String.format("%.2f", totalFromDonutActivity);
+        String taxString = String.format("%.2f", tax);
+        String totalOrderString = String.format("%.2f", totalOrder);
+
+        subTotal.setText(totalFromDonutActivityString);
+        salesTax.setText(taxString);
+        total.setText(totalOrderString);
 
     }
 }
+
+

@@ -20,8 +20,8 @@ import java.util.ArrayList;
 public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.ItemsHolder> {
 
     private Context context;
-    private ArrayList<DonutItem> donutItems;
-
+    //private ArrayList<DonutItem> donutItems;
+    public static ArrayList<DonutItem> donutItems;
     private RecyclerViewClickInterface recyclerViewClickInterface;
 
     /**
@@ -51,7 +51,6 @@ public class DonutItemAdapter extends RecyclerView.Adapter<DonutItemAdapter.Item
 
         return new DonutItemAdapter.ItemsHolder(view);
     }
-
 
     /**
      * Assign data values for each row according to their "position" (index) when the item becomes
