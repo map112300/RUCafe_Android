@@ -4,15 +4,15 @@ public interface RecyclerViewClickInterface {
 
     /**
      * Method to be implemented in any class that inhereits interface
+     *
      * @param position
-     * @param quantity
      */
-    void onIncrementBTClick(int position, int quantity);
+    void onIncrementBTClick(int position);
 
     /**
      * Method to be implemented in any class that inhereits interface
+     *
      * @param position
-     * @param quantity
      */
-    void onDecrementBTClick(int position, int quantity);
+    void onDecrementBTClick(int position);
 }

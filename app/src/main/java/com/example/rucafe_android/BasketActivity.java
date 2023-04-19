@@ -16,11 +16,9 @@ public class BasketActivity extends AppCompatActivity {
 
     //TODO get rid of remove button make it so click can remove with alert
     private Button remove, placeOrder;
-
     private TextView subTotal, salesTax, total;
 
     private ArrayList<MenuItem> listViewItems;
-
     private final double NJ_TAX = .06625;
 
     @Override
@@ -36,8 +34,8 @@ public class BasketActivity extends AppCompatActivity {
         total = findViewById(R.id.total_field);
 
 
-        ArrayAdapter<Donut> menuItemArrayAdapter = new ArrayAdapter<Donut>(
-                this, android.R.layout.simple_list_item_1, OrderingDonutsActivity.donutsToAdd);
+        ArrayAdapter<MenuItem> menuItemArrayAdapter = new ArrayAdapter<MenuItem>(
+                this, android.R.layout.simple_list_item_1, OrderingDonutsActivity.donutsInOrder);
 
         listView.setAdapter(menuItemArrayAdapter);
         setPriceValues();

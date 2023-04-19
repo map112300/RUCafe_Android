@@ -2,6 +2,7 @@ package com.example.rucafe_android;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,14 +14,14 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
 
     //TODO FIX FIX this is value that will get passed
     //TODO when order is placed total donuts needs to be reset
     public static double totalDonuts = 0.00;
-
-    public static ArrayList<Donut> donutsToAdd = new ArrayList<>();
+    public static ObservableArrayList<MenuItem> donutsInOrder = new ObservableArrayList<>();
     private RecyclerView recycler;
     private Button addToBasket;
     private TextView donutTotal;
@@ -110,13 +111,16 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     /**
      * Interface method that updates total when donut quantity incremented
      * @param position
-     * @param quantity
+     *
      */
     @Override
-    public void onIncrementBTClick(int position, int quantity) {
+    public void onIncrementBTClick(int position) {
 
         double price = donutItems.get(position).getDonutPrice();
         double total = Double.valueOf(donutTotal.getText().toString());
+        int quantity = donutItems.get(position).getQuantity();
+        quantity += 1;
+        donutHolder.notifyDataSetChanged();
         donutItems.get(position).setQuantity(quantity);
         total += price;
         String totalString = String.format("%.2f", total);
@@ -126,15 +130,17 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     /**
      * Interface method that updates total price when donut quantity decremented
      * @param position
-     * @param quantity
+     *
      */
     @Override
-    public void onDecrementBTClick(int position, int quantity) {
+    public void onDecrementBTClick(int position) {
 
         double price = donutItems.get(position).getDonutPrice();
         double total = Double.valueOf(donutTotal.getText().toString());
+        int quantity = donutItems.get(position).getQuantity();
+        quantity -= 1;
+        donutHolder.notifyDataSetChanged();
         donutItems.get(position).setQuantity(quantity);
-
         total -= price;
         String totalString = String.format("%.2f", total);
         donutTotal.setText(totalString);
@@ -146,13 +152,10 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
      */
     public void clearAllFields() {
 
-        for(int i = 0; i < donutItems.size(); i++) { //resets recycler view
-            donutItems.get(i).setQuantity(0);
-        }
-        DonutAdapter.ItemsHolder.quantity = 0; //updates quantity in adapter
-        donutHolder.notifyDataSetChanged(); //notifies data change
+        donutItems.clear();
+        donutHolder.notifyDataSetChanged();
+        setupDonuts();
         donutTotal.setText("0.00");
-
     }
 
 
@@ -165,8 +168,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
         for(int i = 0; i < donutItems.size(); i++) {
             if(donutItems.get(i).getQuantity() > 0) {
-                donutsToAdd.add(donutItems.get(i));
-                donutsToAdd.get(i).setQuantity(donutItems.get(i).getQuantity());
+                Collections.addAll(donutsInOrder, donutItems.get(i));
             }
         }
     }

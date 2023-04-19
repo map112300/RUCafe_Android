@@ -87,7 +87,6 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
         private Button btn_add, btn_remove;
         private ConstraintLayout parentLayout; //row layout
 
-        public static int quantity = 0;
 
 
         public ItemsHolder(@NonNull View itemView) {
@@ -103,15 +102,13 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
             btn_add.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    quantity++;
-                    donut_qty.setText(String.valueOf(quantity));
-                    recyclerViewClickInterface.onIncrementBTClick(getAdapterPosition(), quantity);
+                    recyclerViewClickInterface.onIncrementBTClick(getAdapterPosition());
                 }
             });
             btn_remove.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if(quantity == 0) {
+                    if(Integer.valueOf(donut_qty.getText().toString()) == 0) {
                         AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
                         alert.setTitle("RU Cafe Error");
                         alert.setMessage("Donut Quantity Can Not Be Negative!");
@@ -119,9 +116,7 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
                         AlertDialog dialog = alert.create();
                         dialog.show();
                     } else {
-                        quantity--;
-                        donut_qty.setText(String.valueOf(quantity));
-                        recyclerViewClickInterface.onDecrementBTClick(getAdapterPosition(), quantity);
+                        recyclerViewClickInterface.onDecrementBTClick(getAdapterPosition());
                     }
 
                 }
