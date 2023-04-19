@@ -18,10 +18,7 @@ import java.util.Collections;
 
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
 
-    //TODO FIX FIX this is value that will get passed
-    //TODO when order is placed total donuts needs to be reset
     public static double totalDonuts = 0.00;
-    public static ObservableArrayList<MenuItem> donutsInOrder = new ObservableArrayList<>();
     private RecyclerView recycler;
     private Button addToBasket;
     private TextView donutTotal;
@@ -47,8 +44,6 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         addToBasket = (Button) findViewById(R.id.add_to_BasketBT);
         donutTotal = findViewById(R.id.donut_total_Field);
 
-
-        //TODO NEED TO PROPERLY IMPLEMENT
         addToBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -56,14 +51,11 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
                 alert.setTitle("Add to order");
                 alert.setMessage("Would you like to add these donuts to your order?");
 
-
-                //handle the "YES" click
-                //TODO transfer data on yes click and clear all fields
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         totalDonuts += Double.valueOf(donutTotal.getText().toString()); //update totalDonuts to be passed
-                        updateDonutsSelected();
-                        clearAllFields();
+                        placeDonutOrder();
+
                         Toast.makeText(OrderingDonutsActivity.this,
                                 "Donuts have been added to basket!", Toast.LENGTH_LONG).show();
 
@@ -159,17 +151,19 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     }
 
 
-    //TODO need to update quantities incorrect in basket
+    //TODO NEED TO IMPLEMENT BETTER TO INCORPORATE ORDER
     /**
      * Method that iterates through recycler view to create an arraylist of Donuts to add to basket
      * @return
      */
-    public void updateDonutsSelected() {
+    public void placeDonutOrder() {
+
 
         for(int i = 0; i < donutItems.size(); i++) {
             if(donutItems.get(i).getQuantity() > 0) {
-                Collections.addAll(donutsInOrder, donutItems.get(i));
+                Collections.addAll(MainActivity.itemsInOrder, donutItems.get(i));
             }
         }
+        clearAllFields();
     }
 }
