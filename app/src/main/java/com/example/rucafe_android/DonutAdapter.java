@@ -87,8 +87,6 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
         private Button btn_add, btn_remove;
         private ConstraintLayout parentLayout; //row layout
 
-
-
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
             donut_flavor = itemView.findViewById(R.id.donut_flavor);

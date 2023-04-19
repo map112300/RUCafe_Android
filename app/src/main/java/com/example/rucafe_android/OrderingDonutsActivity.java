@@ -158,7 +158,6 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
      */
     public void placeDonutOrder() {
 
-
         for(int i = 0; i < donutItems.size(); i++) {
             if(donutItems.get(i).getQuantity() > 0) {
                 Collections.addAll(MainActivity.itemsInOrder, donutItems.get(i));
