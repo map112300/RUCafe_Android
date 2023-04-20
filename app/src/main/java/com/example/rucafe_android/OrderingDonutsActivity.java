@@ -48,7 +48,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
             @Override
             public void onClick(View view) {
 
-                if(checkSelection()) { //error checking case to make sure donuts have been selected
+                if(emptySelection()) { //error checking case to make sure donuts have been selected
                     return;
                 }
 
@@ -172,7 +172,11 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         clearAllFields();
     }
 
-    public boolean checkSelection() {
+    /**
+     * Helper method that makes sure selection is valid; customer has selected donuts to add to basket
+     * @return true if no donuts have been selected, false otherwise
+     */
+    public boolean emptySelection() {
 
         int selectionCheck = 0;
         for (int i = 0; i < donutItems.size(); i++) {
@@ -192,7 +196,6 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
             return true;
         }
-
         return false;
     }
 

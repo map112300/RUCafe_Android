@@ -20,7 +20,6 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
     private ListView listView;
     ArrayAdapter<MenuItem> menuItemArrayAdapter;
 
-    //TODO get rid of remove button make it so click can remove with alert
     private Button placeOrder;
     private TextView subTotal, salesTax, total;
     private final double NJ_TAX = .06625;
@@ -36,7 +35,6 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
         salesTax = findViewById(R.id.sales_tax_field);
         total = findViewById(R.id.total_field);
 
-
         menuItemArrayAdapter = new ArrayAdapter<MenuItem>(
                 this, android.R.layout.simple_list_item_1, MainActivity.itemsInOrder);
 
@@ -44,11 +42,47 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
         listView.setOnItemClickListener(this);
         setPriceValues();
 
+
+        //TODO implement properly with order
+        placeOrder.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(emptySelection()) { //error checking case to make sure items exist in basket
+                    return;
+                }
+
+                AlertDialog.Builder alert = new AlertDialog.Builder(BasketActivity.this);
+                alert.setTitle("Place Order");
+                alert.setMessage("Would you like to place this order?");
+
+                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(BasketActivity.this,
+                                "Order has been placed!", Toast.LENGTH_LONG).show();
+
+                    }
+                }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        Toast.makeText(BasketActivity.this,
+                                "Order has not been placed!", Toast.LENGTH_LONG).show();
+
+                    }
+                });
+                AlertDialog dialog = alert.create();
+                dialog.show();
+            }
+        });
+
     }
 
     //TODO will need to adjust implementation upon completion of coffee
     /**
-     * Helper method that sets all price views
+     * Helper method that sets all price values
      */
     private void setPriceValues() {
 
@@ -66,6 +100,14 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
 
     }
 
+    /**
+     * On item click for remove confirms if user wants to remove an item from the list or not
+     * @param parent The AdapterView where the click happened.
+     * @param view The view within the AdapterView that was clicked (this
+     *            will be a view provided by the adapter)
+     * @param position The position of the view in the adapter.
+     * @param id The row id of the item that was clicked.
+     */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
@@ -93,5 +135,25 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
         });
         AlertDialog dialog = alert.create();
         dialog.show();
+    }
+
+    /**
+     * Helper method that makes sure selection is valid; menu items are in basket
+     * @return true if no menu items are in basket, false otherwise
+     */
+    public boolean emptySelection() {
+
+        //error checking case
+        if (menuItemArrayAdapter.getCount() == 0) { //no selection has been made display error message
+            AlertDialog.Builder alert = new AlertDialog.Builder(BasketActivity.this);
+            alert.setTitle("RU Cafe Error");
+            alert.setMessage("No items are in basket. Order can not be placed until items are added!");
+
+            AlertDialog dialog = alert.create();
+            dialog.show();
+
+            return true;
+        }
+        return false;
     }
 }
