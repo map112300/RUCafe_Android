@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
+    //xml ID variables
     private ImageButton basketBT;
     private ImageButton orderBT;
     private ImageButton donutBT;
     private ImageButton coffeeBT;
 
-    private Button toastBT;
 
     public static ObservableArrayList<MenuItem> itemsInOrder = new ObservableArrayList<>();
     private Order currentOrder;

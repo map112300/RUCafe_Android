@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder> {
 
     private Context context;
-    public static ArrayList<Donut> donutItems;
+    private ArrayList<Donut> donutItems;
     private RecyclerViewClickInterface recyclerViewClickInterface;
 
     /**
