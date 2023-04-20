@@ -47,6 +47,11 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         addToBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(checkSelection()) { //error checking case to make sure donuts have been selected
+                    return;
+                }
+
                 AlertDialog.Builder alert = new AlertDialog.Builder(OrderingDonutsActivity.this);
                 alert.setTitle("Add to order");
                 alert.setMessage("Would you like to add these donuts to your order?");
@@ -163,6 +168,32 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
                 Collections.addAll(MainActivity.itemsInOrder, donutItems.get(i));
             }
         }
+
         clearAllFields();
     }
+
+    public boolean checkSelection() {
+
+        int selectionCheck = 0;
+        for (int i = 0; i < donutItems.size(); i++) {
+            if (donutItems.get(i).getQuantity() > 0) {
+                selectionCheck++;
+            }
+        }
+
+        //error checking case
+        if (selectionCheck == 0) { //no selection has been made display error message
+            AlertDialog.Builder alert = new AlertDialog.Builder(OrderingDonutsActivity.this);
+            alert.setTitle("RU Cafe Error");
+            alert.setMessage("Please select donuts before adding to basket!");
+
+            AlertDialog dialog = alert.create();
+            dialog.show();
+
+            return true;
+        }
+
+        return false;
+    }
+
 }
