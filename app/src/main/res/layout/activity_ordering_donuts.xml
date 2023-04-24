@@ -10,73 +10,59 @@
 
     <TextView
         android:id="@+id/donut_total_Field2"
-        android:layout_width="28dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="345dp"
-        android:layout_marginBottom="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text="@string/dollar_sign"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
     <Button
         android:id="@+id/add_to_BasketBT"
         android:layout_width="167dp"
         android:layout_height="86dp"
-        android:layout_marginStart="205dp"
-        android:layout_marginEnd="36dp"
-        android:layout_marginBottom="36dp"
         android:background="#E91E63"
         android:text="@string/add_to_basket"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.666"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="@+id/rcView"
+        app:layout_constraintTop_toBottomOf="@+id/rcView"
+        app:layout_constraintVertical_bias="0.5" />
 
     <TextView
         android:id="@+id/donut_total_Field"
-        android:layout_width="94dp"
-        android:layout_height="28dp"
-        android:layout_marginStart="83dp"
-        android:layout_marginEnd="234dp"
-        android:layout_marginBottom="37dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="2dp"
         android:text="@string/default_price"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toEndOf="@+id/donut_total_Field2"
+        app:layout_constraintTop_toTopOf="@+id/donut_total_Field2" />
 
     <TextView
         android:id="@+id/textView15"
-        android:layout_width="96dp"
-        android:layout_height="42dp"
-        android:layout_marginStart="38dp"
-        android:layout_marginEnd="277dp"
-        android:layout_marginBottom="81dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="8dp"
         android:text="@string/total_Price"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="@+id/rcView"
+        app:layout_constraintTop_toTopOf="@+id/add_to_BasketBT" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rcView"
-        android:layout_width="355dp"
-        android:layout_height="403dp"
-        android:layout_marginStart="19dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_width="349dp"
+        android:layout_height="506dp"
+        android:layout_marginTop="16dp"
         android:background="#FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />
 
@@ -84,14 +70,21 @@
         android:id="@+id/textView7"
         android:layout_width="291dp"
         android:layout_height="57dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="6dp"
         android:text="@string/donuts_icon"
         android:textAlignment="center"
         android:textColor="#FFFFFF"
         android:textSize="48sp"
         android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:constraint_referenced_ids="textView15,donut_total_Field,donut_total_Field2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

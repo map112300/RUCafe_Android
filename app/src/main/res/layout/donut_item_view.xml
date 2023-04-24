@@ -25,74 +25,77 @@
                 android:id="@+id/btn_remove"
                 android:layout_width="47dp"
                 android:layout_height="43dp"
-                android:layout_marginStart="12dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginEnd="10dp"
                 android:text="@string/remove_button"
                 android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/donut_price"
-                app:layout_constraintTop_toTopOf="@+id/donut_price"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintBottom_toBottomOf="@+id/donut_qty"
+                app:layout_constraintEnd_toStartOf="@+id/donut_qty"
+                app:layout_constraintTop_toTopOf="@+id/donut_qty"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/donut_flavor"
-                android:layout_width="251dp"
-                android:layout_height="39dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="12dp"
-                android:layout_marginTop="28dp"
                 android:textColor="#FF5722"
                 android:textColorHighlight="#FF5722"
                 android:textColorLink="#FF5722"
                 android:textSize="24sp"
                 android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/donut_image"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/donut_image" />
 
             <ImageView
                 android:id="@+id/donut_image"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
+                android:layout_width="110dp"
+                android:layout_height="110dp"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="12dp"
                 android:scaleType="fitCenter"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
                 tools:srcCompat="@tools:sample/avatars" />
 
             <TextView
                 android:id="@+id/donut_price"
                 android:layout_width="52dp"
-                android:layout_height="41dp"
-                android:layout_marginTop="16dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:textColor="#FF5722"
                 android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="@+id/donut_flavor"
-                app:layout_constraintTop_toBottomOf="@+id/donut_flavor" />
+                app:layout_constraintBottom_toBottomOf="@+id/btn_remove"
+                app:layout_constraintEnd_toStartOf="@+id/btn_remove"
+                app:layout_constraintTop_toTopOf="@+id/btn_remove" />
 
             <Button
                 android:id="@+id/btn_add"
                 android:layout_width="47dp"
                 android:layout_height="43dp"
-                android:layout_marginStart="100dp"
-                android:layout_marginBottom="32dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="8dp"
                 android:text="@string/add_button"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/donut_price"
-                app:layout_constraintTop_toTopOf="@+id/donut_price"
-                app:layout_constraintVertical_bias="0.0"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/donut_flavor"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
                 android:id="@+id/donut_qty"
                 android:layout_width="27dp"
-                android:layout_height="33dp"
-                android:layout_marginStart="68dp"
-                android:layout_marginBottom="36dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
                 android:text="@string/default_qty"
                 android:textColor="#FF5722"
                 android:textSize="20sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/donut_price" />
+                app:layout_constraintBottom_toBottomOf="@+id/btn_add"
+                app:layout_constraintEnd_toStartOf="@+id/btn_add"
+                app:layout_constraintTop_toTopOf="@+id/btn_add" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
