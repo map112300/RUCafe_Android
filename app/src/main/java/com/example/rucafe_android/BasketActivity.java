@@ -13,8 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.ArrayList;
-
 public class BasketActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
     private ListView listView;
@@ -36,7 +34,7 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
         total = findViewById(R.id.total_field);
 
         menuItemArrayAdapter = new ArrayAdapter<MenuItem>(
-                this, android.R.layout.simple_list_item_1, MainActivity.itemsInOrder);
+                this, R.layout.basket_list, R.id.list_content, MainActivity.itemsInOrder);
 
         listView.setAdapter(menuItemArrayAdapter);
         listView.setOnItemClickListener(this);
