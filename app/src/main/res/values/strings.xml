@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RUCafe_Android</string>
+    <string name="app_name">RU Cafe</string>
     <string name="main_menu">Main Menu</string>
     <string name="rutgers_cafe">Rutgers Cafe</string>
     <string name="basket_icon">Basket</string>
@@ -35,6 +35,19 @@
         <item>Powdered</item>
         <item>Double Chocolate</item>
     </string-array>
+
+    <string-array name="coffee_sizes">
+        <item>Short</item>
+        <item>Tall</item>
+        <item>Grande</item>
+        <item>Venti</item>
+    </string-array>
+
+    <string name="sweet_cream">Sweet Cream</string>
+    <string name="french_vanilla">French Vanilla</string>
+    <string name="irish_cream">Irish Cream</string>
+    <string name="caramel">Caramel</string>
+    <string name="mocha">Mocha</string>
 
     <string name="remove_item">Remove</string>
     <string name="default_qty">0</string>

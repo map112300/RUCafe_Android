@@ -15,19 +15,23 @@
         <activity
             android:name=".StoreOrdersActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:label="@string/orders_icon"/>
         <activity
             android:name=".BasketActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".MainActivity"
+            android:label="@string/basket_icon"/>
         <activity
             android:name=".OrderingCoffeeActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:label="@string/coffee_icon"/>
         <activity
             android:name=".OrderingDonutsActivity"
             android:exported="false"
-            android:parentActivityName=".MainActivity"/>
+            android:parentActivityName=".MainActivity"
+            android:label="@string/donuts_icon"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
