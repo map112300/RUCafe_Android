@@ -58,14 +58,6 @@ public class MainActivity extends AppCompatActivity {
         return this.placedOrders;
     }
 
-//    /**
-//     * Places the current order
-//     */
-//    public static void placeOrder() {
-//        this.placedOrders.add(this.currentOrder);
-//        this.orderNumber += 1;
-//        this.currentOrder = new Order(this.orderNumber);
-//    }
 
     /**
      * Removes the given order from the store orders

@@ -78,5 +78,6 @@
     <string name="dollar_sign">$</string>
     <string name="add_button">+</string>
     <string name="remove_button">-</string>
+    <string name="order_history_remove">REMOVE ORDER</string>
 
 </resources>

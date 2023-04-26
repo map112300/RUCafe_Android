@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/items_listview"
+        android:id="@+id/order_history_items"
         android:layout_width="359dp"
         android:layout_height="379dp"
         android:layout_marginTop="16dp"
@@ -78,7 +78,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/items_listview" />
+        app:layout_constraintTop_toBottomOf="@+id/order_history_items" />
 
     <TextView
         android:id="@+id/textView10"
@@ -116,7 +116,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
     <TextView
-        android:id="@+id/total_field"
+        android:id="@+id/order_histroy_total"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="2dp"

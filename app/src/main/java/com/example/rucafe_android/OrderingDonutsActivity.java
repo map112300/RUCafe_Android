@@ -13,7 +13,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
-    public double totalPrice = 0.00;
     private TextView donutTotal;
     private final ArrayList <Donut> donutItems = new ArrayList<>();
     private DonutAdapter donutHolder;

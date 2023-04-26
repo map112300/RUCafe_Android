@@ -29,12 +29,11 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
-
-        listView = findViewById(R.id.items_listview);
+        listView = findViewById(R.id.order_history_items);
         placeOrder = findViewById(R.id.place_order_button);
         subTotal = findViewById(R.id.subtotal_field);
         salesTax = findViewById(R.id.sales_tax_field);
-        total = findViewById(R.id.total_field);
+        total = findViewById(R.id.order_histroy_total);
 
         menuItemsInOrder = new ObservableArrayList<>();
         MenuItem[] itemArray = new MenuItem[MainActivity.currentOrder.getMenuItems().size()];
