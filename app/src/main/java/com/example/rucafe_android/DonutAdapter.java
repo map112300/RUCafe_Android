@@ -11,16 +11,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
 public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder> {
-
-    private Context context;
-    private ArrayList<Donut> donutItems;
-    private RecyclerViewClickInterface recyclerViewClickInterface;
+    private final Context context;
+    private final ArrayList<Donut> donutItems;
+    private final RecyclerViewClickInterface recyclerViewClickInterface;
 
     /**
      * Constructor for DonutItemHolder
@@ -63,7 +61,6 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
         holder.donut_price.setText(String.valueOf(donutItems.get(position).getDonutPrice()));
         holder.donut_image.setImageResource(donutItems.get(position).getImage());
         holder.donut_qty.setText(String.valueOf(donutItems.get(position).getQuantity()));
-
     }
 
     /**
@@ -81,11 +78,10 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
      * Get the views from the row layout file, similar to the onCreate() method.
      */
     public class ItemsHolder extends RecyclerView.ViewHolder {
-
-        private TextView donut_flavor, donut_price, donut_qty;
-        private ImageView donut_image;
-        private Button btn_add, btn_remove;
-        private ConstraintLayout parentLayout; //row layout
+        private final TextView donut_flavor;
+        private final TextView donut_price;
+        private final TextView donut_qty;
+        private final ImageView donut_image;
 
         public ItemsHolder(@NonNull View itemView) {
             super(itemView);
@@ -93,30 +89,21 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
             donut_price = itemView.findViewById(R.id.donut_price);
             donut_qty = itemView.findViewById(R.id.donut_qty);
             donut_image = itemView.findViewById(R.id.donut_image);
-            btn_add = itemView.findViewById(R.id.btn_add);
-            btn_remove = itemView.findViewById(R.id.btn_remove);
-            parentLayout = itemView.findViewById(R.id.rowLayout);
+            Button btn_add = itemView.findViewById(R.id.btn_add);
+            Button btn_remove = itemView.findViewById(R.id.btn_remove);
 
-            btn_add.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    recyclerViewClickInterface.onIncrementBTClick(getAdapterPosition());
-                }
-            });
-            btn_remove.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(Integer.valueOf(donut_qty.getText().toString()) == 0) {
-                        AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
-                        alert.setTitle("RU Cafe Error");
-                        alert.setMessage("Donut Quantity Can Not Be Negative!");
+            btn_add.setOnClickListener(v -> recyclerViewClickInterface.onIncrementBTClick(getAdapterPosition()));
 
-                        AlertDialog dialog = alert.create();
-                        dialog.show();
-                    } else {
-                        recyclerViewClickInterface.onDecrementBTClick(getAdapterPosition());
-                    }
+            btn_remove.setOnClickListener(v -> {
+                if(Integer.parseInt(donut_qty.getText().toString()) == 0) {
+                    AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
+                    alert.setTitle("RU Cafe Error");
+                    alert.setMessage("Donut Quantity Can Not Be Negative!");
 
+                    AlertDialog dialog = alert.create();
+                    dialog.show();
+                } else {
+                    recyclerViewClickInterface.onDecrementBTClick(getAdapterPosition());
                 }
             });
         }

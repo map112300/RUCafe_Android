@@ -2,7 +2,6 @@ package com.example.rucafe_android;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.ObservableArrayList;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,8 +16,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
-
-    public static double totalDonuts = 0.00;
+    public static double totalPrice = 0.00;
     private RecyclerView recycler;
     private Button addToBasket;
     private TextView donutTotal;
@@ -35,19 +33,18 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordering_donuts);
-        recycler = findViewById(R.id.rcView);
+        recycler = (RecyclerView) findViewById(R.id.rcView);
+        addToBasket = (Button) findViewById(R.id.add_to_BasketBT);
+        donutTotal = (TextView) findViewById(R.id.donut_total_Field);
+
         setupDonuts();
         donutHolder = new DonutAdapter(this, donutItems, this);
         recycler.setAdapter(donutHolder);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
-        addToBasket = (Button) findViewById(R.id.add_to_BasketBT);
-        donutTotal = findViewById(R.id.donut_total_Field);
-
         addToBasket.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if(emptySelection()) { //error checking case to make sure donuts have been selected
                     return;
                 }
@@ -58,7 +55,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        totalDonuts += Double.valueOf(donutTotal.getText().toString()); //update totalDonuts to be passed
+                        totalPrice += Double.valueOf(donutTotal.getText().toString()); //update totalDonuts to be passed
                         placeDonutOrder();
 
                         Toast.makeText(OrderingDonutsActivity.this,
@@ -76,7 +73,6 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
                 dialog.show();
             }
         });
-
     }
 
     /**

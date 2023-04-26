@@ -84,7 +84,7 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
      */
     private void setPriceValues() {
 
-        double totalFromDonutActivity = OrderingDonutsActivity.totalDonuts;
+        double totalFromDonutActivity = OrderingDonutsActivity.totalPrice;
         double tax = NJ_TAX * totalFromDonutActivity;
         double totalOrder = tax + totalFromDonutActivity;
 
@@ -115,7 +115,7 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
 
         alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                OrderingDonutsActivity.totalDonuts -= Double.valueOf(MainActivity.itemsInOrder.get(position).itemPrice()); //update totalDonuts to be passed
+                OrderingDonutsActivity.totalPrice -= Double.valueOf(MainActivity.itemsInOrder.get(position).itemPrice()); //update totalDonuts to be passed
                 setPriceValues();
                 MainActivity.itemsInOrder.remove(position);
                 menuItemArrayAdapter.notifyDataSetChanged();

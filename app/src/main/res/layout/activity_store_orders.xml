@@ -11,20 +11,14 @@
         android:id="@+id/textView14"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="565dp"
-        android:layout_marginEnd="281dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="16dp"
         android:text="@string/order_numbers"
         android:textColor="#E11383"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.583"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/items_listview" />
 
     <TextView
         android:id="@+id/textView3"
@@ -43,8 +37,8 @@
 
     <ListView
         android:id="@+id/items_listview"
-        android:layout_width="360dp"
-        android:layout_height="432dp"
+        android:layout_width="367dp"
+        android:layout_height="551dp"
         android:layout_marginTop="16dp"
         android:background="#FF5722"
         android:textAlignment="center"
@@ -57,65 +51,47 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="242dp"
-        android:layout_marginTop="2dp"
+        android:layout_marginStart="16dp"
         android:text="@string/total_Price"
         android:textColor="#E11383"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/spinner2"
         app:layout_constraintTop_toTopOf="@+id/textView14" />
 
     <TextView
         android:id="@+id/total_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="341dp"
+        android:layout_marginStart="2dp"
         android:text="@string/default_price"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/subtotal_field2"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/subtotal_field2"
         app:layout_constraintTop_toTopOf="@+id/subtotal_field2" />
 
     <TextView
         android:id="@+id/subtotal_field2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="326dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginStart="4dp"
         android:text="@string/dollar_sign"
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/textView9"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView9"
         app:layout_constraintTop_toTopOf="@+id/textView9" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="326dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="303dp" />
 
     <Spinner
         android:id="@+id/spinner2"
-        android:layout_width="113dp"
-        android:layout_height="29dp"
-        android:layout_marginStart="129dp"
-        android:layout_marginTop="1dp"
+        android:layout_width="90dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/textView14"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textView14"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toTopOf="@+id/textView14" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

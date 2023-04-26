@@ -58,7 +58,6 @@
         android:id="@+id/place_order_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
         android:background="#E11383"
         android:text="@string/place_order"
         android:textSize="20sp"
@@ -66,7 +65,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
     <TextView
         android:id="@+id/textView11"
@@ -125,7 +125,8 @@
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="@+id/subtotal_field2"
         app:layout_constraintStart_toEndOf="@+id/subtotal_field2"
-        app:layout_constraintTop_toTopOf="@+id/subtotal_field2" />
+        app:layout_constraintTop_toTopOf="@+id/subtotal_field2"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/subtotal_field"
