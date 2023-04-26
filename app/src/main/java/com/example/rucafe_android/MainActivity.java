@@ -30,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         this.currentOrder = new Order(orderNumber);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

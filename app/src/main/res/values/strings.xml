@@ -9,6 +9,9 @@
     <string name="toast_button">CLICK ME!!!!</string>
     <string name="subtotal">Subtotal</string>
     <string name="add_to_order">ADD TO ORDER</string>
+    <string name="basket">Basket</string>
+    <string name="store_orders">Order History</string>
+    <string name="order_numbers">Order No.</string>
 
     <string-array name="donut_types">
         <item>Cake</item>

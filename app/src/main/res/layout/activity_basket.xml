@@ -33,7 +33,7 @@
         android:layout_width="161dp"
         android:layout_height="63dp"
         android:layout_marginTop="16dp"
-        android:text="@string/basket_icon"
+        android:text="@string/basket"
         android:textColor="#E11383"
         android:textSize="48sp"
         android:textStyle="bold"
