@@ -5,25 +5,20 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
-    public static double totalPrice = 0.00;
-    private RecyclerView recycler;
-    private Button addToBasket;
+    public double totalPrice = 0.00;
     private TextView donutTotal;
-    private ArrayList <Donut> donutItems = new ArrayList<>();
+    private final ArrayList <Donut> donutItems = new ArrayList<>();
     private DonutAdapter donutHolder;
 
-    private int[] itemImages = {R.drawable.blueberry_cake, R.drawable.coffee_cake, R.drawable.oldfashioned_cake
+    private final int[] itemImages = {R.drawable.blueberry_cake, R.drawable.coffee_cake, R.drawable.oldfashioned_cake
             , R.drawable.chocolate_hole, R.drawable.glazed_hole, R.drawable.jelly_hole
             , R.drawable.cinnamon_hole, R.drawable.chocolate_yeast, R.drawable.strawberry_yeast
             , R.drawable.vanilla_yeast, R.drawable.boston_yeast, R.drawable.powdered_yeast
@@ -33,45 +28,36 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordering_donuts);
-        recycler = (RecyclerView) findViewById(R.id.rcView);
-        addToBasket = (Button) findViewById(R.id.add_to_BasketBT);
+        RecyclerView recycler = (RecyclerView) findViewById(R.id.rcView);
+        Button addToBasket = (Button) findViewById(R.id.add_to_BasketBT);
         donutTotal = (TextView) findViewById(R.id.donut_total_Field);
 
         setupDonuts();
+        createAddToBasketOnClick(addToBasket);
         donutHolder = new DonutAdapter(this, donutItems, this);
         recycler.setAdapter(donutHolder);
         recycler.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        addToBasket.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(emptySelection()) { //error checking case to make sure donuts have been selected
-                    return;
-                }
-
-                AlertDialog.Builder alert = new AlertDialog.Builder(OrderingDonutsActivity.this);
-                alert.setTitle("Add to order");
-                alert.setMessage("Would you like to add these donuts to your order?");
-
-                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        totalPrice += Double.valueOf(donutTotal.getText().toString()); //update totalDonuts to be passed
-                        placeDonutOrder();
-
-                        Toast.makeText(OrderingDonutsActivity.this,
-                                "Donuts have been added to basket!", Toast.LENGTH_LONG).show();
-
-                    }
-                    //handle the "NO" click
-                }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int which) {
-                        Toast.makeText(OrderingDonutsActivity.this,
-                                "Donuts have not been added to basket!", Toast.LENGTH_LONG).show();
-                    }
-                });
-                AlertDialog dialog = alert.create();
-                dialog.show();
+    private void createAddToBasketOnClick(Button button) {
+        button.setOnClickListener(view -> {
+            if(emptySelection()) { //error checking case to make sure donuts have been selected
+                return;
             }
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(OrderingDonutsActivity.this);
+            alert.setTitle("Add to order");
+            alert.setMessage("Would you like to add these donuts to your order?");
+
+            alert.setPositiveButton("yes", (dialog, which) -> {
+                placeDonutOrderInBasket();
+                Toast.makeText(OrderingDonutsActivity.this,
+                        "Donuts have been added to basket!", Toast.LENGTH_LONG).show();
+
+            }).setNegativeButton("no", (dialog, which) -> Toast.makeText(OrderingDonutsActivity.this,
+                    "Donuts have not been added to basket!", Toast.LENGTH_LONG).show());
+            AlertDialog dialog = alert.create();
+            dialog.show();
         });
     }
 
@@ -79,24 +65,23 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
      * Adds DonutItems to arraylist of donut items, populates default values
      */
     private void setupDonuts() {
-
         String[] cakeFlavors = getResources().getStringArray(R.array.cake_flavors);
         String[] holeFlavors = getResources().getStringArray(R.array.hole_flavors);
         String[] yeastFlavors = getResources().getStringArray(R.array.yeast_flavors);
 
         int current = 0; //will be used for setting images
-        for(int i = 0; i < cakeFlavors.length; i++) {
-            donutItems.add(new Donut(DonutType.CAKE, 0, cakeFlavors[i],  itemImages[current]));
+        for (String cakeFlavor : cakeFlavors) {
+            donutItems.add(new Donut(DonutType.CAKE, 0, cakeFlavor, itemImages[current]));
             current++;
         }
 
-        for(int i = 0; i < holeFlavors.length; i++) {
-            donutItems.add(new Donut(DonutType.HOLE,  0, holeFlavors[i],  itemImages[current]));
+        for (String holeFlavor : holeFlavors) {
+            donutItems.add(new Donut(DonutType.HOLE, 0, holeFlavor, itemImages[current]));
             current++;
         }
 
-        for(int i = 0; i < yeastFlavors.length; i++) {
-            donutItems.add(new Donut(DonutType.YEAST,  0, yeastFlavors[i], itemImages[current]));
+        for (String yeastFlavor : yeastFlavors) {
+            donutItems.add(new Donut(DonutType.YEAST, 0, yeastFlavor, itemImages[current]));
             current++;
         }
     }
@@ -108,13 +93,13 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
      */
     @Override
     public void onIncrementBTClick(int position) {
-
-        double price = donutItems.get(position).getDonutPrice();
-        double total = Double.valueOf(donutTotal.getText().toString());
-        int quantity = donutItems.get(position).getQuantity();
+        Donut donut = donutItems.get(position);
+        double price = donut.getDonutPrice();
+        double total = Double.parseDouble(donutTotal.getText().toString());
+        int quantity = donut.getQuantity();
         quantity += 1;
         donutHolder.notifyDataSetChanged();
-        donutItems.get(position).setQuantity(quantity);
+        donut.setQuantity(quantity);
         total += price;
         String totalString = String.format("%.2f", total);
         donutTotal.setText(totalString);
@@ -129,7 +114,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     public void onDecrementBTClick(int position) {
 
         double price = donutItems.get(position).getDonutPrice();
-        double total = Double.valueOf(donutTotal.getText().toString());
+        double total = Double.parseDouble(donutTotal.getText().toString());
         int quantity = donutItems.get(position).getQuantity();
         quantity -= 1;
         donutHolder.notifyDataSetChanged();
@@ -137,14 +122,12 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         total -= price;
         String totalString = String.format("%.2f", total);
         donutTotal.setText(totalString);
-
     }
 
     /**
      * Helper that resets default values upon successful order placement
      */
     public void clearAllFields() {
-
         donutItems.clear();
         donutHolder.notifyDataSetChanged();
         setupDonuts();
@@ -152,19 +135,17 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
     }
 
 
-    //TODO NEED TO IMPLEMENT BETTER TO INCORPORATE ORDER
     /**
      * Method that iterates through recycler view to create an arraylist of Donuts to add to basket
      * @return
      */
-    public void placeDonutOrder() {
-
+    public void placeDonutOrderInBasket() {
         for(int i = 0; i < donutItems.size(); i++) {
-            if(donutItems.get(i).getQuantity() > 0) {
-                Collections.addAll(MainActivity.itemsInOrder, donutItems.get(i));
+            Donut donut = donutItems.get(i);
+            if(donut.getQuantity() > 0) {
+                MainActivity.currentOrder.add(donut);
             }
         }
-
         clearAllFields();
     }
 

@@ -1,5 +1,7 @@
 package com.example.rucafe_android;
 
+import androidx.annotation.NonNull;
+
 import java.util.ArrayList;
 
 /**
@@ -91,5 +93,16 @@ public class Order {
             return this.getOrderNumber() == other.getOrderNumber();
         }
         return false;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder();
+        result.append("Order #").append(this.orderNumber).append("\n");
+        for (MenuItem m : this.orderItems) {
+            result.append(m).append("\n");
+        }
+        return result.toString();
     }
 }

@@ -10,16 +10,17 @@ import android.widget.ImageButton;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
-    public static ObservableArrayList<MenuItem> itemsInOrder = new ObservableArrayList<>();
-    private Order currentOrder;
-    private final ArrayList<Order> placedOrders = new ArrayList<>();
-    private int orderNumber = 1;
+    public static final ArrayList<Order> placedOrders = new ArrayList<>();
+    public static int orderNumber = 1;
+    public static Order currentOrder = new Order(1);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_view);
-        this.currentOrder = new Order(orderNumber);
+        for (Order o : placedOrders) {
+            System.out.println(o);
+        }
         //xml ID variables
         ImageButton basketBT = (ImageButton) findViewById(R.id.basket_Button);
         ImageButton orderBT = (ImageButton) findViewById(R.id.order_Button);
@@ -32,10 +33,9 @@ public class MainActivity extends AppCompatActivity {
         createButton(OrderingCoffeeActivity.class, coffeeBT);
     }
 
-    @SuppressWarnings("rawtypes")
     private void createButton(Class targetClass, ImageButton button) {
         button.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, targetClass);
+            Intent intent = new Intent(this, targetClass);
             startActivity(intent);
         });
     }
@@ -58,14 +58,14 @@ public class MainActivity extends AppCompatActivity {
         return this.placedOrders;
     }
 
-    /**
-     * Places the current order
-     */
-    public void placeOrder() {
-        this.placedOrders.add(this.currentOrder);
-        this.orderNumber += 1;
-        this.currentOrder = new Order(this.orderNumber);
-    }
+//    /**
+//     * Places the current order
+//     */
+//    public static void placeOrder() {
+//        this.placedOrders.add(this.currentOrder);
+//        this.orderNumber += 1;
+//        this.currentOrder = new Order(this.orderNumber);
+//    }
 
     /**
      * Removes the given order from the store orders

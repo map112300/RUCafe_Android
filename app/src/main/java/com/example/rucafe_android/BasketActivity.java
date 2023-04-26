@@ -2,6 +2,7 @@ package com.example.rucafe_android;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.ObservableArrayList;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,9 +14,11 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class BasketActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+import java.util.Collections;
 
+public class BasketActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ListView listView;
+    private ObservableArrayList<MenuItem> menuItemsInOrder;
     ArrayAdapter<MenuItem> menuItemArrayAdapter;
 
     private Button placeOrder;
@@ -33,15 +36,18 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
         salesTax = findViewById(R.id.sales_tax_field);
         total = findViewById(R.id.total_field);
 
-        menuItemArrayAdapter = new ArrayAdapter<MenuItem>(
-                this, R.layout.basket_list, R.id.list_content, MainActivity.itemsInOrder);
+        menuItemsInOrder = new ObservableArrayList<>();
+        MenuItem[] itemArray = new MenuItem[MainActivity.currentOrder.getMenuItems().size()];
+        itemArray = MainActivity.currentOrder.getMenuItems().toArray(itemArray);
+        Collections.addAll(menuItemsInOrder, itemArray);
+
+        menuItemArrayAdapter = new ArrayAdapter<>(
+                this, R.layout.basket_list, R.id.list_content, menuItemsInOrder);
 
         listView.setAdapter(menuItemArrayAdapter);
         listView.setOnItemClickListener(this);
         setPriceValues();
 
-
-        //TODO implement properly with order
         placeOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,11 +59,10 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
                 AlertDialog.Builder alert = new AlertDialog.Builder(BasketActivity.this);
                 alert.setTitle("Place Order");
                 alert.setMessage("Would you like to place this order?");
-
                 alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        placeOrder();
                         Toast.makeText(BasketActivity.this,
                                 "Order has been placed!", Toast.LENGTH_LONG).show();
 
@@ -75,24 +80,30 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
                 dialog.show();
             }
         });
-
     }
 
-    //TODO will need to adjust implementation upon completion of coffee
+    private void placeOrder() {
+        MainActivity.placedOrders.add(MainActivity.currentOrder);
+        MainActivity.orderNumber += 1;
+        MainActivity.currentOrder = new Order(MainActivity.orderNumber);
+        this.menuItemsInOrder.clear();
+        menuItemArrayAdapter.notifyDataSetChanged();
+        setPriceValues();
+    }
+
     /**
      * Helper method that sets all price values
      */
     private void setPriceValues() {
+        double orderSubtotal = MainActivity.currentOrder.getOrderSubtotal();
+        double tax = NJ_TAX * orderSubtotal;
+        double totalOrder = tax + orderSubtotal;
 
-        double totalFromDonutActivity = OrderingDonutsActivity.totalPrice;
-        double tax = NJ_TAX * totalFromDonutActivity;
-        double totalOrder = tax + totalFromDonutActivity;
-
-        String totalFromDonutActivityString = String.format("%.2f", totalFromDonutActivity);
+        String subtotalString = String.format("%.2f", orderSubtotal);
         String taxString = String.format("%.2f", tax);
         String totalOrderString = String.format("%.2f", totalOrder);
 
-        subTotal.setText(totalFromDonutActivityString);
+        subTotal.setText(subtotalString);
         salesTax.setText(taxString);
         total.setText(totalOrderString);
 
@@ -108,17 +119,18 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
         AlertDialog.Builder alert = new AlertDialog.Builder(BasketActivity.this);
         alert.setTitle("Remove Item");
         alert.setMessage("Would you like to remove this item from your basket?");
 
         alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                OrderingDonutsActivity.totalPrice -= Double.valueOf(MainActivity.itemsInOrder.get(position).itemPrice()); //update totalDonuts to be passed
+                MenuItem menuItem = menuItemsInOrder.get(position);
+                MainActivity.currentOrder.remove(menuItem);
+                menuItemsInOrder.remove(position);
                 setPriceValues();
-                MainActivity.itemsInOrder.remove(position);
                 menuItemArrayAdapter.notifyDataSetChanged();
+                System.out.println(MainActivity.currentOrder.getOrderSubtotal());
 
                 Toast.makeText(BasketActivity.this,
                         "Item has been removed from basket!", Toast.LENGTH_LONG).show();
@@ -140,7 +152,6 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
      * @return true if no menu items are in basket, false otherwise
      */
     public boolean emptySelection() {
-
         //error checking case
         if (menuItemArrayAdapter.getCount() == 0) { //no selection has been made display error message
             AlertDialog.Builder alert = new AlertDialog.Builder(BasketActivity.this);
@@ -149,7 +160,6 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
 
             AlertDialog dialog = alert.create();
             dialog.show();
-
             return true;
         }
         return false;
