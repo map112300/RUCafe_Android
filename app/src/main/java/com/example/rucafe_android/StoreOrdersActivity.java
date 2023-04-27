@@ -1,5 +1,6 @@
 package com.example.rucafe_android;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.ObservableArrayList;
 
@@ -63,6 +64,11 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
 
     private void createRemoveOrderButton(Button button) {
         button.setOnClickListener(v -> {
+
+            if(emptySelection()) {
+                return;
+            }
+
             MainActivity.placedOrders.remove(this.currentOrder);
             this.currentOrder = null;
             if (MainActivity.placedOrders.size() > 0) {
@@ -118,5 +124,23 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
         }
         String totalString = String.format("%.2f", total);
         totalSum.setText(totalString);
+    }
+
+    /**
+     * Helper method that makes sure selection is valid; menu items are in basket
+     * @return true if no menu items are in basket, false otherwise
+     */
+    public boolean emptySelection() {
+        //error checking case
+        if (menuItemArrayAdapter == null) { //no selection has been made display error message
+            AlertDialog.Builder alert = new AlertDialog.Builder(StoreOrdersActivity.this);
+            alert.setTitle("RU Cafe Error");
+            alert.setMessage("No Orders to Delete! Please place order.");
+
+            AlertDialog dialog = alert.create();
+            dialog.show();
+            return true;
+        }
+        return false;
     }
 }
