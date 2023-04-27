@@ -1,5 +1,6 @@
 package com.example.rucafe_android;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.view.View;
@@ -7,10 +8,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
 import android.widget.Spinner;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -24,8 +25,6 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
     private Spinner quantitySpinner;
     private TextInputEditText subtotalText;
     private Button addtoOrderButton;
-    private ArrayAdapter<CoffeeSize> sizeSpinnerAdapter;
-    private ArrayAdapter<Integer> quantitySpinnerAdapter;
     Integer[] quantities = {1,2,3,4,5,6,7,8};
     CoffeeSize[] sizes = {CoffeeSize.SHORT, CoffeeSize.TALL, CoffeeSize.GRANDE, CoffeeSize.VENTI};
     CoffeeSize currentSize = CoffeeSize.SHORT;
@@ -39,17 +38,18 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         initializeLayoutElements();
         createAddonCheckBoxes();
 
-        this.sizeSpinnerAdapter = new ArrayAdapter<>(this,
+        ArrayAdapter<CoffeeSize> sizeSpinnerAdapter = new ArrayAdapter<>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sizes);
         sizeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sizeSpinner.setAdapter(sizeSpinnerAdapter);
         createSizeSpinner();
 
-        this.quantitySpinnerAdapter = new ArrayAdapter<>(this,
+        ArrayAdapter<Integer> quantitySpinnerAdapter = new ArrayAdapter<>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, quantities);
         quantitySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         quantitySpinner.setAdapter(quantitySpinnerAdapter);
         createQtySpinner();
+        createAddToOrderButton();
 
         readCurrentOrder();
     }
@@ -63,6 +63,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         this.sizeSpinner = findViewById(R.id.coffee_size_spinner);
         this.quantitySpinner = findViewById(R.id.coffee_quantity_spinner);
         this.subtotalText = findViewById(R.id.coffee_subtotal);
+        this.addtoOrderButton = findViewById(R.id.coffee_add_to_order_button);
     }
 
     private void createSizeSpinner() {
@@ -85,6 +86,40 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+    }
+
+    private void createAddToOrderButton() {
+        this.addtoOrderButton.setOnClickListener(v -> {
+            AlertDialog.Builder alert = new AlertDialog.Builder(this);
+            alert.setTitle("Add to order");
+            alert.setMessage("Would you like to add this coffee to your order?");
+
+            alert.setPositiveButton("yes", (dialog, which) -> {
+                placeDonutOrderInBasket();
+                Toast.makeText(this,
+                        "Coffee has been added to basket!", Toast.LENGTH_LONG).show();
+
+            }).setNegativeButton("no", (dialog, which) -> Toast.makeText(this,
+                    "Coffee has not been added to basket!", Toast.LENGTH_LONG).show());
+            AlertDialog dialog = alert.create();
+            dialog.show();
+        });
+    }
+
+    private void placeDonutOrderInBasket() {
+        MainActivity.currentOrder.add(this.currentOrder);
+        resetFields();
+    }
+
+    private void resetFields() {
+        sweetCreamCheck.setChecked(false);
+        frenchVanillaCheck.setChecked(false);
+        irishCreamCheck.setChecked(false);
+        caramelCheck.setChecked(false);
+        mochaCheck.setChecked(false);
+        currentQty = quantities[0];
+        currentSize = sizes[0];
+        readCurrentOrder();
     }
 
     private void createAddonCheckBoxes() {
@@ -118,7 +153,6 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         if (caramelCheck.isChecked()) addons.add(CoffeeAddon.CARAMEL);
         this.currentOrder = new Coffee(this.currentSize, this.currentQty, addons);
         updateSubtotal();
-
     }
 
     private void updateSubtotal() {
