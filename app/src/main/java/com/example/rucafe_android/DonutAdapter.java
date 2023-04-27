@@ -29,8 +29,8 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
     /**
      * Constructor for DonutItemHolder
      *
-     * @param context
-     * @param donutItems
+     * @param context    the context
+     * @param donutItems a list of donut items
      */
     public DonutAdapter(Context context, ArrayList<Donut> donutItems, RecyclerViewClickInterface recyclerViewClickInterface) {
         this.context = context;
@@ -40,10 +40,6 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
 
     /**
      * This method will inflate the row layout for the items in the RecyclerView
-     *
-     * @param parent
-     * @param viewType
-     * @return
      */
     @NonNull
     @Override
@@ -101,7 +97,7 @@ public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder>
             btn_add.setOnClickListener(v -> recyclerViewClickInterface.onIncrementBTClick(getAdapterPosition()));
 
             btn_remove.setOnClickListener(v -> {
-                if(Integer.parseInt(donut_qty.getText().toString()) == 0) {
+                if (Integer.parseInt(donut_qty.getText().toString()) == 0) {
                     AlertDialog.Builder alert = new AlertDialog.Builder(itemView.getContext());
                     alert.setTitle("RU Cafe Error");
                     alert.setMessage("Donut Quantity Can Not Be Negative!");

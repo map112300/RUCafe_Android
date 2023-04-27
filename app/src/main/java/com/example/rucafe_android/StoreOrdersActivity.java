@@ -71,12 +71,13 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
     /**
      * Removes an order from list of orders
      * Order is no longer visible in order history
+     *
      * @param button
      */
     private void createRemoveOrderButton(Button button) {
         button.setOnClickListener(v -> {
 
-            if(emptySelection()) {
+            if (emptySelection()) {
                 return;
             }
 
@@ -96,10 +97,11 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
 
     /**
      * Inherited from OnItemsSelected interface
-     * @param parent The AdapterView where the selection happened
-     * @param view The view within the AdapterView that was clicked
+     *
+     * @param parent   The AdapterView where the selection happened
+     * @param view     The view within the AdapterView that was clicked
      * @param position The position of the view in the adapter
-     * @param id The row id of the item that is selected
+     * @param id       The row id of the item that is selected
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -115,10 +117,12 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
 
     /**
      * Inherited from OnItemsSelected interface
+     *
      * @param parent The AdapterView that now contains no selected item.
      */
     @Override
-    public void onNothingSelected(AdapterView<?> parent){}
+    public void onNothingSelected(AdapterView<?> parent) {
+    }
 
     /**
      * Updates order that is currently in view, and price accordingly
@@ -159,6 +163,7 @@ public class StoreOrdersActivity extends AppCompatActivity implements AdapterVie
 
     /**
      * Helper method that makes sure selection is valid; menu items are in basket
+     *
      * @return true if no menu orders exist, false otherwise
      */
     public boolean emptySelection() {

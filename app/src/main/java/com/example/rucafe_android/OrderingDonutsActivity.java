@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
     private TextView donutTotal;
-    private final ArrayList <Donut> donutItems = new ArrayList<>();
+    private final ArrayList<Donut> donutItems = new ArrayList<>();
     private DonutAdapter donutHolder;
 
     private final int[] itemImages = {R.drawable.blueberry_cake, R.drawable.coffee_cake, R.drawable.oldfashioned_cake
@@ -46,11 +46,12 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
     /**
      * Adds Donut order to basket
-     * @param button
+     *
+     * @param button the add to basket button
      */
     private void createAddToBasketOnClick(Button button) {
         button.setOnClickListener(view -> {
-            if(emptySelection()) { //error checking case to make sure donuts have been selected
+            if (emptySelection()) { //error checking case to make sure donuts have been selected
                 return;
             }
 
@@ -97,8 +98,8 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
     /**
      * Interface method that updates total when donut quantity incremented
-     * @param position
      *
+     * @param position
      */
     @Override
     public void onIncrementBTClick(int position) {
@@ -116,12 +117,11 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
     /**
      * Interface method that updates total price when donut quantity decremented
-     * @param position
      *
+     * @param position the index
      */
     @Override
     public void onDecrementBTClick(int position) {
-
         double price = donutItems.get(position).getDonutPrice();
         double total = Double.parseDouble(donutTotal.getText().toString());
         int quantity = donutItems.get(position).getQuantity();
@@ -146,12 +146,13 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
     /**
      * Method that iterates through recycler view to create an arraylist of Donuts to add to basket
+     *
      * @return
      */
     public void placeDonutOrderInBasket() {
-        for(int i = 0; i < donutItems.size(); i++) {
+        for (int i = 0; i < donutItems.size(); i++) {
             Donut donut = donutItems.get(i);
-            if(donut.getQuantity() > 0) {
+            if (donut.getQuantity() > 0) {
                 MainActivity.currentOrder.add(donut);
             }
         }
@@ -160,6 +161,7 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
 
     /**
      * Helper method that makes sure selection is valid; customer has selected donuts to add to basket
+     *
      * @return true if no donuts have been selected, false otherwise
      */
     public boolean emptySelection() {

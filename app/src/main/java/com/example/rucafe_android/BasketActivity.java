@@ -62,8 +62,9 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     /**
-     * Sets the onClick behavior for the
-     * @param button
+     * Sets the onClick behavior for the Place Order button.
+     *
+     * @param button the place order button
      */
     private void createPlaceOrderButton(Button button) {
         button.setOnClickListener(v -> {
@@ -97,7 +98,7 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     /**
-     * Places current order that is in basket
+     * Places current order that is in basket.
      */
     private void placeOrder() {
         MainActivity.placedOrders.add(MainActivity.currentOrder);
@@ -109,7 +110,7 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     /**
-     * Helper method that sets all price values
+     * Helper method that sets all price values.
      */
     private void setPriceValues() {
         double orderSubtotal = MainActivity.currentOrder.getOrderSubtotal();
@@ -166,7 +167,7 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
     }
 
     /**
-     * Helper method that makes sure selection is valid; menu items are in basket
+     * Helper method that makes sure selection is valid; menu items are in basket.
      *
      * @return true if no menu items are in basket, false otherwise
      */

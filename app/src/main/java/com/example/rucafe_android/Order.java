@@ -95,6 +95,11 @@ public class Order {
         return false;
     }
 
+    /**
+     * Generates a string representation of the order
+     *
+     * @return a string representation of the order
+     */
     @NonNull
     @Override
     public String toString() {
