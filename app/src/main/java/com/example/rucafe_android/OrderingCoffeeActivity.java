@@ -16,6 +16,7 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
+
 public class OrderingCoffeeActivity extends AppCompatActivity {
     private CheckBox sweetCreamCheck, frenchVanillaCheck, irishCreamCheck;
     private CheckBox caramelCheck, mochaCheck;

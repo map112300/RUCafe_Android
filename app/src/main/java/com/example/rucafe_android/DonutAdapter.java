@@ -15,6 +15,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
+/**
+ * Adapter class for recycler view object
+ * Recycler view of Donuts
+ *
+ * @author Marco Pigna, Bryan Bezerra
+ */
 public class DonutAdapter extends RecyclerView.Adapter<DonutAdapter.ItemsHolder> {
     private final Context context;
     private final ArrayList<Donut> donutItems;

@@ -16,6 +16,12 @@ import android.widget.Toast;
 
 import java.util.Collections;
 
+/**
+ * Basket Activity
+ * Holds a list of all items added to basket
+ *
+ * @author Marco Pigna, Bryan Bezerra
+ */
 public class BasketActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
     private ListView listView;
     private ObservableArrayList<MenuItem> menuItemsInOrder;
@@ -81,6 +87,9 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
         });
     }
 
+    /**
+     * Places current order that is in basket
+     */
     private void placeOrder() {
         MainActivity.placedOrders.add(MainActivity.currentOrder);
         MainActivity.orderNumber += 1;
