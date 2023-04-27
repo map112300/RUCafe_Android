@@ -1,7 +1,6 @@
 package com.example.rucafe_android;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.databinding.ObservableArrayList;
 
 import android.content.Intent;
 import android.os.Bundle;
