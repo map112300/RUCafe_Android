@@ -23,20 +23,25 @@ import java.util.Collections;
  * @author Marco Pigna, Bryan Bezerra
  */
 public class BasketActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
-    private ListView listView;
     private ObservableArrayList<MenuItem> menuItemsInOrder;
     ArrayAdapter<MenuItem> menuItemArrayAdapter;
 
-    private Button placeOrder;
     private TextView subTotal, salesTax, total;
     private final double NJ_TAX = .06625;
 
+    /**
+     * Initializes the view upon creation.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *                           previously being shut down then this Bundle contains the data it most
+     *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_basket);
-        listView = findViewById(R.id.order_history_items);
-        placeOrder = findViewById(R.id.place_order_button);
+        ListView listView = findViewById(R.id.order_history_items);
+        Button placeOrderButton = findViewById(R.id.place_order_button);
         subTotal = findViewById(R.id.subtotal_field);
         salesTax = findViewById(R.id.sales_tax_field);
         total = findViewById(R.id.order_histroy_total);
@@ -53,37 +58,41 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
         listView.setOnItemClickListener(this);
         setPriceValues();
 
-        placeOrder.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        createPlaceOrderButton(placeOrderButton);
+    }
 
-                if(emptySelection()) { //error checking case to make sure items exist in basket
-                    return;
-                }
-
-                AlertDialog.Builder alert = new AlertDialog.Builder(BasketActivity.this);
-                alert.setTitle("Place Order");
-                alert.setMessage("Would you like to place this order?");
-                alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        placeOrder();
-                        Toast.makeText(BasketActivity.this,
-                                "Order has been placed!", Toast.LENGTH_LONG).show();
-
-                    }
-                }).setNegativeButton("no", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-
-                        Toast.makeText(BasketActivity.this,
-                                "Order has not been placed!", Toast.LENGTH_LONG).show();
-
-                    }
-                });
-                AlertDialog dialog = alert.create();
-                dialog.show();
+    /**
+     * Sets the onClick behavior for the
+     * @param button
+     */
+    private void createPlaceOrderButton(Button button) {
+        button.setOnClickListener(v -> {
+            if (emptySelection()) { //error checking case to make sure items exist in basket
+                return;
             }
+
+            AlertDialog.Builder alert = new AlertDialog.Builder(BasketActivity.this);
+            alert.setTitle("Place Order");
+            alert.setMessage("Would you like to place this order?");
+            alert.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    placeOrder();
+                    Toast.makeText(BasketActivity.this,
+                            "Order has been placed!", Toast.LENGTH_LONG).show();
+
+                }
+            }).setNegativeButton("no", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                    Toast.makeText(BasketActivity.this,
+                            "Order has not been placed!", Toast.LENGTH_LONG).show();
+
+                }
+            });
+            AlertDialog dialog = alert.create();
+            dialog.show();
         });
     }
 
@@ -119,11 +128,12 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
 
     /**
      * On item click for remove confirms if user wants to remove an item from the list or not
-     * @param parent The AdapterView where the click happened.
-     * @param view The view within the AdapterView that was clicked (this
-     *            will be a view provided by the adapter)
+     *
+     * @param parent   The AdapterView where the click happened.
+     * @param view     The view within the AdapterView that was clicked (this
+     *                 will be a view provided by the adapter)
      * @param position The position of the view in the adapter.
-     * @param id The row id of the item that was clicked.
+     * @param id       The row id of the item that was clicked.
      */
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -157,6 +167,7 @@ public class BasketActivity extends AppCompatActivity implements AdapterView.OnI
 
     /**
      * Helper method that makes sure selection is valid; menu items are in basket
+     *
      * @return true if no menu items are in basket, false otherwise
      */
     public boolean emptySelection() {

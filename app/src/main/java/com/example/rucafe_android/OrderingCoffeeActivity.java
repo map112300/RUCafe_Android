@@ -17,7 +17,11 @@ import com.google.android.material.textfield.TextInputEditText;
 
 import java.util.ArrayList;
 
-
+/**
+ * Screen that allows the user to order coffee.
+ *
+ * @author Marco Pigna, Bryan Bezerra
+ */
 public class OrderingCoffeeActivity extends AppCompatActivity {
     private CheckBox sweetCreamCheck, frenchVanillaCheck, irishCreamCheck;
     private CheckBox caramelCheck, mochaCheck;
@@ -25,12 +29,19 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
     private Spinner quantitySpinner;
     private TextInputEditText subtotalText;
     private Button addtoOrderButton;
-    Integer[] quantities = {1,2,3,4,5,6,7,8};
+    Integer[] quantities = {1, 2, 3, 4, 5, 6, 7, 8};
     CoffeeSize[] sizes = {CoffeeSize.SHORT, CoffeeSize.TALL, CoffeeSize.GRANDE, CoffeeSize.VENTI};
     CoffeeSize currentSize = CoffeeSize.SHORT;
     int currentQty = 1;
     Coffee currentOrder;
 
+    /**
+     * Initializes the activity.
+     *
+     * @param savedInstanceState If the activity is being re-initialized after
+     *                           previously being shut down then this Bundle contains the data it most
+     *                           recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,6 +65,9 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         readCurrentOrder();
     }
 
+    /**
+     * Finds the necessary layout elements and sets them to their proper variables.
+     */
     private void initializeLayoutElements() {
         this.sweetCreamCheck = findViewById(R.id.sweet_cream_check);
         this.frenchVanillaCheck = findViewById(R.id.french_vanilla_check);
@@ -66,28 +80,41 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         this.addtoOrderButton = findViewById(R.id.coffee_add_to_order_button);
     }
 
+    /**
+     * Sets the onClick behavior for the size Spinner.
+     */
     private void createSizeSpinner() {
         this.sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 updateSize(position);
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
     }
 
+    /**
+     * Sets the onclick behavior for the quantity Spinner.
+     */
     private void createQtySpinner() {
         this.quantitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 updateQuantity(position);
             }
+
             @Override
-            public void onNothingSelected(AdapterView<?> parent) {}
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
         });
     }
 
+    /**
+     * Sets the onClick behavior for the Add to Order button.
+     */
     private void createAddToOrderButton() {
         this.addtoOrderButton.setOnClickListener(v -> {
             AlertDialog.Builder alert = new AlertDialog.Builder(this);
@@ -95,7 +122,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
             alert.setMessage("Would you like to add this coffee to your order?");
 
             alert.setPositiveButton("yes", (dialog, which) -> {
-                placeDonutOrderInBasket();
+                placeCoffeeOrderInBasket();
                 Toast.makeText(this,
                         "Coffee has been added to basket!", Toast.LENGTH_LONG).show();
 
@@ -106,11 +133,17 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         });
     }
 
-    private void placeDonutOrderInBasket() {
+    /**
+     * Places the current Coffee order in the basket.
+     */
+    private void placeCoffeeOrderInBasket() {
         MainActivity.currentOrder.add(this.currentOrder);
         resetFields();
     }
 
+    /**
+     * Resets all fields to their default values.
+     */
     private void resetFields() {
         sweetCreamCheck.setChecked(false);
         frenchVanillaCheck.setChecked(false);
@@ -119,9 +152,14 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         mochaCheck.setChecked(false);
         currentQty = quantities[0];
         currentSize = sizes[0];
+        sizeSpinner.setSelection(0);
+        quantitySpinner.setSelection(0);
         readCurrentOrder();
     }
 
+    /**
+     * Sets the onClick behavior for all checkboxes in the activity.
+     */
     private void createAddonCheckBoxes() {
         createAddonCheckbox(sweetCreamCheck);
         createAddonCheckbox(frenchVanillaCheck);
@@ -130,20 +168,38 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         createAddonCheckbox(mochaCheck);
     }
 
+    /**
+     * Sets the onClick behavior for one checkbox.
+     *
+     * @param box the Checkbox whose behavior will be modified
+     */
     private void createAddonCheckbox(CheckBox box) {
         box.setOnCheckedChangeListener((buttonView, isChecked) -> readCurrentOrder());
     }
 
+    /**
+     * Updates the current order's size.
+     *
+     * @param sizeIndex the index of the new size
+     */
     private void updateSize(int sizeIndex) {
         this.currentSize = sizes[sizeIndex];
         readCurrentOrder();
     }
 
+    /**
+     * Updates the current order's quantity.
+     *
+     * @param quantityIndex the index of the new quantity
+     */
     private void updateQuantity(int quantityIndex) {
         this.currentQty = quantities[quantityIndex];
         readCurrentOrder();
     }
 
+    /**
+     * Reads the user's input and updates the current order.
+     */
     private void readCurrentOrder() {
         ArrayList<CoffeeAddon> addons = new ArrayList<>();
         if (sweetCreamCheck.isChecked()) addons.add(CoffeeAddon.SWEET_CREAM);
@@ -155,9 +211,12 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         updateSubtotal();
     }
 
+    /**
+     * Updates the subtotal to reflect the current order.
+     */
     private void updateSubtotal() {
         double subtotal = this.currentOrder.itemPrice();
-        String subtotalString =  String.format("$%.2f", subtotal);
+        String subtotalString = String.format("$%.2f", subtotal);
         this.subtotalText.setText(subtotalString);
     }
 }
