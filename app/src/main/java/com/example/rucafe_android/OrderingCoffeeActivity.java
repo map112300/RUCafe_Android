@@ -7,6 +7,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.Spinner;
 
 import android.os.Bundle;
@@ -35,18 +36,21 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ordering_coffee);
         initializeLayoutElements();
+        createAddonCheckBoxes();
 
         this.sizeSpinnerAdapter = new ArrayAdapter<>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, sizes);
         sizeSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sizeSpinner.setAdapter(sizeSpinnerAdapter);
+        createSizeSpinner();
 
         this.quantitySpinnerAdapter = new ArrayAdapter<>(this,
                 androidx.appcompat.R.layout.support_simple_spinner_dropdown_item, quantities);
         quantitySpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         quantitySpinner.setAdapter(quantitySpinnerAdapter);
+        createQtySpinner();
 
-        this.subtotalText.setText(R.string.coffee_default_subtotal);
+        readCurrentOrder();
     }
 
     private void initializeLayoutElements() {
@@ -64,12 +68,44 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         this.sizeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-
+                updateSize(position);
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {}
         });
+    }
+
+    private void createQtySpinner() {
+        this.quantitySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updateQuantity(position);
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {}
+        });
+    }
+
+    private void createAddonCheckBoxes() {
+        createAddonCheckbox(sweetCreamCheck);
+        createAddonCheckbox(frenchVanillaCheck);
+        createAddonCheckbox(irishCreamCheck);
+        createAddonCheckbox(caramelCheck);
+        createAddonCheckbox(mochaCheck);
+    }
+
+    private void createAddonCheckbox(CheckBox box) {
+        box.setOnCheckedChangeListener((buttonView, isChecked) -> readCurrentOrder());
+    }
+
+    private void updateSize(int sizeIndex) {
+        this.currentSize = sizes[sizeIndex];
+        readCurrentOrder();
+    }
+
+    private void updateQuantity(int quantityIndex) {
+        this.currentQty = quantities[quantityIndex];
+        readCurrentOrder();
     }
 
     private void readCurrentOrder() {
@@ -81,6 +117,7 @@ public class OrderingCoffeeActivity extends AppCompatActivity {
         if (caramelCheck.isChecked()) addons.add(CoffeeAddon.CARAMEL);
         this.currentOrder = new Coffee(this.currentSize, this.currentQty, addons);
         updateSubtotal();
+
     }
 
     private void updateSubtotal() {
