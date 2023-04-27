@@ -9,6 +9,12 @@ import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
+/**
+ * Main Activity of RU Cafe
+ * Creates intent for necessary activities
+ *
+ * @author Marco Pigna, Bryan Bezerra
+ */
 public class MainActivity extends AppCompatActivity {
     public static final ArrayList<Order> placedOrders = new ArrayList<>();
     public static int orderNumber = 1;
@@ -33,38 +39,11 @@ public class MainActivity extends AppCompatActivity {
         createButton(OrderingCoffeeActivity.class, coffeeBT);
     }
 
+
     private void createButton(Class targetClass, ImageButton button) {
         button.setOnClickListener(v -> {
             Intent intent = new Intent(this, targetClass);
             startActivity(intent);
         });
-    }
-
-    /**
-     * Return an object containing the current order
-     *
-     * @return the current order
-     */
-    public Order getCurrentOrder() {
-        return this.currentOrder;
-    }
-
-    /**
-     * Returns a list of placed orders
-     *
-     * @return list of placed orders
-     */
-    public ArrayList<Order> getPlacedOrders() {
-        return this.placedOrders;
-    }
-
-
-    /**
-     * Removes the given order from the store orders
-     *
-     * @param order the order to be removed
-     */
-    public void removeOrderFromStoreOrders(Order order) {
-        this.placedOrders.remove(order);
     }
 }

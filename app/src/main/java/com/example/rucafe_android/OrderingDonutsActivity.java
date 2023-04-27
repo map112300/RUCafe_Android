@@ -12,6 +12,12 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+/**
+ * Donut Ordering Activity
+ * Allows user to select quantity, and type of donut to add to basket
+ *
+ * @author Marco Pigna, Bryan Bezerra
+ */
 public class OrderingDonutsActivity extends AppCompatActivity implements RecyclerViewClickInterface {
     private TextView donutTotal;
     private final ArrayList <Donut> donutItems = new ArrayList<>();
@@ -38,6 +44,10 @@ public class OrderingDonutsActivity extends AppCompatActivity implements Recycle
         recycler.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Adds Donut order to basket
+     * @param button
+     */
     private void createAddToBasketOnClick(Button button) {
         button.setOnClickListener(view -> {
             if(emptySelection()) { //error checking case to make sure donuts have been selected

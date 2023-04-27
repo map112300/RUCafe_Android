@@ -1,5 +1,11 @@
 package com.example.rucafe_android;
 
+/**
+ * RecyclerView Interface
+ * Implements increment and decrement actions
+ *
+ * @author Marco Pigna, Bryan Bezerra
+ */
 public interface RecyclerViewClickInterface {
 
     /**
